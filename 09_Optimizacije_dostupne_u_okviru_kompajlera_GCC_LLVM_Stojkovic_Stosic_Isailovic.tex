@@ -1,0 +1,238 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[a4paper]{article}
+
+\usepackage{color}
+\usepackage{url}
+\usepackage[T2A]{fontenc} % enable Cyrillic fonts
+\usepackage[utf8]{inputenc} % make weird characters work
+\usepackage{graphicx}
+
+\usepackage[english,serbian]{babel}
+%\usepackage[english,serbianc]{babel} %ukljuciti babel sa ovim opcijama, umesto gornjim, ukoliko se koristi cirilica
+
+\usepackage[unicode]{hyperref}
+\hypersetup{colorlinks,citecolor=green,filecolor=green,linkcolor=blue,urlcolor=blue}
+
+\usepackage{listings}
+
+%\newtheorem{primer}{Пример}[section] %ćirilični primer
+\newtheorem{primer}{Primer}[section]
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\scriptsize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  firstnumber=1000,                % start line enumeration with line 1000
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\begin{document}
+
+\title{Optimizacije u okviru kompajlera GCC/LLVM\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
+
+\author{Tamara Stojković, Emilija Stošić, Teodora Isailović \and tamara.stojkovic.1998@gmail.com, emilijazstosic@gmail.com, \and teodora.isailovic@gmail.com}
+\date{12.~novembar 2022.}
+
+\maketitle
+
+\abstract{
+Ovo se piše na kraju. }
+\tableofcontents
+
+\newpage
+
+\section{Uvod}
+\label{sec:uvod}
+Optimizacija predstavlja tehniku transformacije dela programa,  tako da kod bude što je moguće efikasniji. 
+Za cilj ima poboljšanje performansi koda, a ne savršen rezultat ( uglavnom se ne može se reći da predstavlja pronalazak „optimalnog rešenja“ ). 
+Optimizacija je oblast u kojoj se danas vrši većina istraživanja kompajlera. 
+U okviru savremenih kompajlera dostupan je veliki broj optimizacija koje sve međusobno deluju na razne načine i imaju uticaj na kvalitet koda, veličinu koda, vreme kompilacije, potrošnju energije itd. Kompajleri obično obezbeđuju ograničen broj  standardnih optimizacionih nivoa, kao što su O1, -O2,-O3 i -Os. Na ovim nivoima ostvaruju se kompromisi između  različitih mera kao što su kvalitet koda, veličina koda i vreme kompilacije. 
+U ovom radu ćemo upravo predstaviti vrste optimizacija, sa akcentom na one koje su dostupne u okviru kompajlera GCC i LLVM.
+
+\section{Osnovna podela optimizacija}
+Postoje razne tehnike u primeni procesa optimizacije. Razlikujemo optimizacije koje se primenjuju na međukod,  kao deo generisanja ciljnog koda, ali i nakon generisanja ciljnog koda.
+\textbf{Optimizacija međukoda} primenjuje se da se kod pojednostavi, preuredi ili sažme. Predstavlja optimizaciju koja ne uzima u obzir specifičnost ciljne arhitekture.
+Neke od stavki koje \textbf{optimizacija kao deo generisanja ciljnog koda} omogućava su biranje instrukcija i određivanje načina alociranja objekata. Na kraju, može se izvršiti i \textbf{optimizacija ciljnog koda}, gde se pokušava prerada samog asemblerskog koda u nešto efikasnije. 
+U ovom slučaju zahteva se detaljno poznavanje ciljne arhitekture, kao i asemblerskog i mašinskog jezika ciljnog programa.
+
+
+
+\subsection{Optimizacije međukoda}
+\label{subsec:optimizacija_međukod}
+U okviru optimizacije međukoda razlikujemo :\textbf{lokalne}, \textbf{globalne} i \textbf{međuproceduralne optimizacije}.
+
+\subsubsection{Lokalne optimizacije}
+\label{subsubsec:lokalne}
+Lokalne optimizacije služe za ubrzavanje malih delova neke funkcije i rade sa konketnim naredbama unutar osnovnog bloka(eng. basic block)  
+One su obično najlakše za izvođenje jer nije neophodno raditi analizu kontrole toka(eng. ~{\em  Control - flow}).  
+U nastavku navodimo neke od tehnika lokalne optimizacije koje se vrše nad međukodom.
+
+\begin{itemize}
+  \item \textbf{Eliminacija čestih podizraza (eng. ~{\em Common subexpression elimination} )} \newline
+  Podrazumeva izbegavanje izvračunavanja čestog izraza više puta(ako se javlja više od jednom). 
+  U slučaju da dve operacije daju isti rezultat, kažemo da su česte, pa je bolje izračunati izraz jednom i pozvati ga naredni put na mestu gde je neophodno.
+
+  \item \textbf{Slaganje konstanti (eng. ~{\em Constant folding})} \newline
+  Podrazumeva da se konstantni izrazi mogu evaluirati u vreme kompilacije. To uključuje utvrđivanje da svi operandi u izrazu imaju konstantnu vrednost, a zatim menjanje izraza njegovom vrednošću.
+  Često je i lepše za pisanje i čitanje. 
+  \item \textbf{Propagacija kopija (eng. ~{\em Copy propagation})} \newline
+  Podrazumeva izbegavanje uvođenja promenljivih, koje samo čuvaju vrednosti nekih promenljivih koje već postoje.
+  Posebno je značajna jer je u stanju da eliminiše veliki broj instrukcija, koje služe samo za kopiranje vrednosti iz jedne promenljive u drugu.
+  \item \textbf{Smanjenje snage operatora (eng. ~{\em Operator strength reduction})} \newline
+  Podrazumeva zamenu operatora „jeftinijim operatorom“. 
+  Od same arhitekture zavisi koje operacije se smatraju najjeftinijim, a koje najskupljim, tako da je za dobru optimizaciju neophodno poznavati ciljnu mašinu.
+  \item \textbf{Eliminacija mrtvog koda (eng. ~{\em Dead code elimination})} \newline
+  Podrazumeva da ako se rezultat neke instrukcije nadalje ne koristi, instrukcija se smatra „mrtvom“ i može biti uklonjena. 
+  Ovo omogućava uprošćavanje koda, izbacivanjem nepotrebnih izračunavanja.
+  \item \textbf{Algebarsko pojednostavljenje i reasocijacija (eng. ~{\em Algebaric simplification and reassociation})} \newline
+  Podrazumeva pojednostavljenje izraza korišćenjem algebarskih svojstava(zakona algebre). Reasocijacija podrazumeva korišćenje svojstava kao što su asocijativnost, komutativnost i distributivnost kako bi se nakon toga omogućila lakša primena drugih optimizacija.
+  \item \textbf{Kompozicija lokalnih transformacija} \newline
+  Različite optimizacije koje smo do sada videli, brinu o malom delu koda. 
+  Za maksimalan efekat, možda će morati neke optimizacije da se primene više puta. 
+
+\end{itemize}
+
+
+\subsubsection{Globalne optimizacije}
+\label{subsubsec:globalne}
+Predstavljaju optimizacije koje su slične lokalnim i koje možemo primeniti sa nekim dodatnim analizama.
+„Globalno“ u ovom slučaju ne znači u celom programu, već se optimizacije primenjuju na jednu po jednu funkciju. 
+Ova analiza je znatno moćnija od lokalne, ali dosta komplikovanija. 
+Mnoge lokalne optimizacije se  mogu se primenljivati i globalno, dok postoje i one koje se mogu primeniti samo na globalnom nivou.
+Neke globalne optimizacije date su u nastavku.
+
+\begin{itemize}
+  \item \textbf{Globalna eliminacija mrtvog koda} \newline
+  U ovom slučaju jedina razlika je što se informacije o tome gde je neka promenljiva živa, moraju dobiti globalnom analizom, što je značajno komplikuje u odnosu na lokalnu eliminaciju mrtvog koda.
+  \item \textbf{Globalno propagiranje konstante} \newline
+  Ovo je optimizacija koja svaku promenljivu za koju se zna da je konstantna menja sa tom konstantom.
+  Potrebno je pratiti vrednosti koje mogu biti dodeljene promenljivoj u svakoj tački programa. 
+  \item \textbf{Globalna eliminacija čestih podizraza} \newline
+  Česti podizrazi mogu se eliminisati  i na globalnom nivou, poznavanjem skupa dostupnih izraza.
+  Izrazi su dostupni u jednom trenutku ako su živi pri ulasku u blok, što se utvrđuje ospežnom analizom.
+  \item \textbf{Optimizacija kretanje koda (eng. ~{\em Code motion})} \\
+  Postoje optimizacije koje se mogu primeniti samo globalno i jedna takva je ova i ona objedinjuje sekvence koda zajedničke za jedan ili više blokova. 
+  Cilj je smanjiti veličinu koda i eliminisati eventualna skupa ponovna izračunavanja. 
+  Dva oblika optimizacije izdizanjem koda koje ćemo izdvojiti su :
+  \begin{itemize}
+    \item \textbf{Pomeranje invarijantnog koda(eng. ~{\em loop-invariant})} \\
+       Podrazumeva da se računanje vrednosti neke promenljive može izdvojiti izvan petlje, ako je nezavisno od brojača petlje.
+    \item \textbf{Parcijalna eliminacija suvišnosti (eng. ~{\em Partial redundancy elimination})} \\
+    Za neki račun u programu kaže se da je suvišan, ako računa već poznatu vrednost. 
+    Parcijalno redundantno izračunavanje  je ono čija je vrednost poznata samo u nekim delovima. 
+    
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Međuproceduralne optimizacije}
+\label{subsubsec:međuproceduralne}
+U okviru ove optimizacije jedna od najznacajnijih tehnika je \textbf{uvlačenje definicija funkcija(eng. ~{\em Inlining})}. 
+Uglavnom se jednostavnije funkcije uvlače, a složenije ne. 
+Premalo uvlačenja dovodi do troškova vezanih za pozive funkcija, a previše uveća veličinu koda i dovodi do neefikasnosti, pa treba uspostaviti ravnotežu.
+
+
+\subsection{Optimizacije koda}
+\label{subsec:optimizacija_kod}
+Optimizovani međukod se u fazi generisanja koda prevodi u asemblerski tj. mašinski kod. 
+U finalnom generisanju koda, bitno je donošenje pametnih odluka kako bi generisani ciljni kod bio što efikasniji. 
+U ovom slučaju bitne su specifične karakteristike mašine za prozivodnju optimizovanog koda za tu konkretnu arhitekturu. 
+Ralikujemo sledeće tehnike optimizacija koda:
+\begin{itemize}
+  \item \textbf{Optimizacija redosleda instrukcija} \\
+  Razlikujemo fazu odabira instrukcija, fazu alokacije registara i fazu raspoređivanja instrukcija.
+  \item \textbf{Optimizacija upotrebom keša} \\
+  Upotreba keša se zasniva na prostornoj i vremenskoj lokalnosti, a cilj je da postane što bolja.
+  Ako je nekoj memoriji skoro pristupano, vremenska podrazumeva da ce biti uskoro opet,a prostorna da ce i njeni susedni objekti biti uskoro korišćeni.
+ 
+\end{itemize}
+Postoje razne optimizacije koje se mogu sprovesti i na nivou izgenerisanog ciljnog koda.
+
+
+
+
+
+
+\section{Prvi naslov}
+\label{sec:naslov1}
+
+
+Ovde pišem tekst. 
+
+
+
+\subsection{Prvi podnaslov}
+\label{subsec:podnaslov1}
+
+Ovde pišem tekst. 
+
+
+\subsection{Drugi podnaslov}
+\label{subsec:podnaslov2}
+
+Ovde pišem tekst. 
+
+
+
+\subsection{... podnaslov}
+\label{subsec:podnaslovN}
+
+Ovde pišem tekst. 
+
+\section{n-ti naslov}
+\label{sec:naslovN}
+
+Ovde pišem tekst. 
+
+
+\subsection{... podnaslov}
+\label{subsec:podnaslovK}
+
+Ovde pišem tekst. 
+
+
+
+
+\section{Zaključak}
+\label{sec:zakljucak}
+
+Ovde pišem zaključak. 
+
+
+
+\addcontentsline{toc}{section}{Literatura}
+\appendix
+\bibliography{seminarski} 
+\bibliographystyle{plain}
+
+\appendix
+\section{Dodatak}
+Ovde pišem dodatne stvari, ukoliko za time ima potrebe.
+
+
+
+\end{document}
