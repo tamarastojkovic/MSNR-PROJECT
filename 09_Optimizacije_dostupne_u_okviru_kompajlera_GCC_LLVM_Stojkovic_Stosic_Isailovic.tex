@@ -1,4 +1,4 @@
-% !TEX encoding = UTF-8 Unicode
+%!TEX encoding = UTF-8 Unicode
 \documentclass[a4paper]{article}
 
 \usepackage{color}
@@ -73,13 +73,14 @@ Za cilj ima poboljšanje performansi koda, a ne savršen rezultat ( uglavnom se 
 Optimizacija je oblast u kojoj se danas vrši većina istraživanja kompajlera. 
 U okviru savremenih kompajlera dostupan je veliki broj optimizacija koje sve međusobno deluju na razne načine i imaju uticaj na kvalitet koda, veličinu koda, vreme kompilacije, potrošnju energije itd. Kompajleri obično obezbeđuju ograničen broj  standardnih optimizacionih nivoa, kao što su O1, -O2,-O3 i -Os. Na ovim nivoima ostvaruju se kompromisi između  različitih mera kao što su kvalitet koda, veličina koda i vreme kompilacije. 
 U ovom radu ćemo upravo predstaviti vrste optimizacija, sa akcentom na one koje su dostupne u okviru kompajlera GCC i LLVM.
-
+%https://www.tutorialspoint.com/compiler_design/compiler_design_code_optimization.htm za uvod
 \section{Osnovna podela optimizacija}
+\label{sec:podela}
 Postoje razne tehnike u primeni procesa optimizacije. Razlikujemo optimizacije koje se primenjuju na međukod,  kao deo generisanja ciljnog koda, ali i nakon generisanja ciljnog koda.
 \textbf{Optimizacija međukoda} primenjuje se da se kod pojednostavi, preuredi ili sažme. Predstavlja optimizaciju koja ne uzima u obzir specifičnost ciljne arhitekture.
 Neke od stavki koje \textbf{optimizacija kao deo generisanja ciljnog koda} omogućava su biranje instrukcija i određivanje načina alociranja objekata. Na kraju, može se izvršiti i \textbf{optimizacija ciljnog koda}, gde se pokušava prerada samog asemblerskog koda u nešto efikasnije. 
 U ovom slučaju zahteva se detaljno poznavanje ciljne arhitekture, kao i asemblerskog i mašinskog jezika ciljnog programa.
-
+%https://www.codingninjas.com/codestudio/library/code-optimization-in-compiler-design
 
 
 \subsection{Optimizacije međukoda}
@@ -90,7 +91,8 @@ U okviru optimizacije međukoda razlikujemo :\textbf{lokalne}, \textbf{globalne}
 \label{subsubsec:lokalne}
 Lokalne optimizacije služe za ubrzavanje malih delova neke funkcije i rade sa konketnim naredbama unutar osnovnog bloka(eng. basic block)  
 One su obično najlakše za izvođenje jer nije neophodno raditi analizu kontrole toka(eng. ~{\em  Control - flow}).  
-U nastavku navodimo neke od tehnika lokalne optimizacije koje se vrše nad međukodom.
+U nastavku navodimo neke od tehnika lokalne optimizacije koje se vrše nad međukodom. %https://www.agner.org/optimize/optimizing_cpp.pdf
+%moze i samo dragonbook da se navede
 
 \begin{itemize}
   \item \textbf{Eliminacija čestih podizraza (eng. ~{\em Common subexpression elimination} )} \newline
@@ -116,6 +118,8 @@ U nastavku navodimo neke od tehnika lokalne optimizacije koje se vrše nad među
   Za maksimalan efekat, možda će morati neke optimizacije da se primene više puta. 
 
 \end{itemize}
+%https://www.agner.org/optimize/optimizing_cpp.pdf
+
 
 
 \subsubsection{Globalne optimizacije}
@@ -148,9 +152,10 @@ Neke globalne optimizacije date su u nastavku.
     
   \end{itemize}
 \end{itemize}
+%https://web.stanford.edu/class/archive/cs/cs143/cs143.1128/lectures/
 
 \subsubsection{Međuproceduralne optimizacije}
-\label{subsubsec:međuproceduralne}
+\label{subsubsec:međuproceduralne} %http://poincare.matf.bg.ac.rs/~filip/kk/materijali/kk.pdf
 U okviru ove optimizacije jedna od najznacajnijih tehnika je \textbf{uvlačenje definicija funkcija(eng. ~{\em Inlining})}. 
 Uglavnom se jednostavnije funkcije uvlače, a složenije ne. 
 Premalo uvlačenja dovodi do troškova vezanih za pozive funkcija, a previše uveća veličinu koda i dovodi do neefikasnosti, pa treba uspostaviti ravnotežu.
@@ -169,8 +174,9 @@ Ralikujemo sledeće tehnike optimizacija koda:
   Upotreba keša se zasniva na prostornoj i vremenskoj lokalnosti, a cilj je da postane što bolja.
   Ako je nekoj memoriji skoro pristupano, vremenska podrazumeva da ce biti uskoro opet,a prostorna da ce i njeni susedni objekti biti uskoro korišćeni.
  
-\end{itemize}
-Postoje razne optimizacije koje se mogu sprovesti i na nivou izgenerisanog ciljnog koda.
+\end{itemize} 
+Postoje razne optimizacije koje se mogu sprovesti i na nivou izgenerisanog ciljnog koda. %http://www.prevodioci.matf.bg.ac.rs/kk/2020/predavanja/09_optimizacija_koda_text.pdf
+
 
 
 
@@ -191,17 +197,68 @@ Ovde pišem tekst.
 Ovde pišem tekst. 
 
 
-\subsection{Drugi podnaslov}
-\label{subsec:podnaslov2}
+\section{Različite optimizacije u okviru kompajlera \\ GCC/LLVM}
+\label{subsec:razlike}
 
-Ovde pišem tekst. 
+U odnosu na namenu svakog od ovih kompajlera  i opseg programa za koje su specifikovani, određuje se i koji je bolji za optimizaciju u nekim konkretnim slučajevima.
+Karakteristike kompajlera koje određuju njihovu oblast upotrebe pa samim tim i optimizacije su: 
+\begin{itemize}
+  \item \textbf{GCC} je oficijalni kompajler za GNU i Linux sisteme i glavni kompajler za kompajliranje i kreiranje drugih operativnih sistema. Podržava tradicionaldne jezike kao što su Ada, Fortran i GO.
+         GCC podržava manje popularne arhitekture, kao i RISC-V ranije u odnosu na LLVM.
+         Trenutno je brži od LLVM-a u  kompajliranju LINUX kernela. 
+         U slučaju korišćenja LLVM-a , kernel se ne može kompajlirati bez modifikacije izvornog koda i parametara kompilacije.
+  \item  Novi jezici  kao što su Swift, Rust, Julia i Ruby, koriste \textbf{LLVM}.
+          LLVM je usklađen strožije sa standardima C-a i C++-a nego GCC, pa se problemi manje javljaju.
+          On takođe podržava neke ekstenzije, kao što su atributi za proveru bezbednosti niti.
+          Ovaj kompilator omogućava tačnije i preciznije dijagnostičke informacije i poruke o greškama. U GCC-u su počele da se poboljšavaju od GCC-a 8.
+          Clang obezbeđuje dodatne korisne alate za statičku analizu i skeniranje koda(scan-build, clang static analyzer, clang-format, clang-tidy).
+          Clang je kompajler  za C, C++, Objective-C, ili Objective-C++.
+\end{itemize}
+GCC se smatrao superiornijim, ali LLVM napreduje. Sada neki smatraju da se LLVM uglavnom koristi da obezbedi performanse superiornije od GCC-a.
+\\ Optimizacije su do sada postale jedna od osnovnih komponenti kompajlera. 
+U kompajlerima je implementirano stotine optimizacija. 
+Na primer, postoji više od 200 optimizacija za GCC i više od 100 za LLVM.  % ref https://www.sciencedirect.com/science/article/abs/pii/S0164121220302740
+Rezultati optimizacije u okviru ovih kompajlera najčešće se moraju posmatrati na konkretnim slučajevima, pa  su neki primeri dati u nastavku.
+
+\subsection{Prvi primer testiranja razlika}
+\label{subsec:primer1}
+Većina radnih opterećenja u oblaku (eng. ~{\em cloud workloads}) mogu da rade u različitim klasterima i nije potrebno navoditi parametre koji se odnose na mašinu. 
+Samo radno opterećenje ima nizak nivo kompilacije i optimizacije (-O2 ili ispod).
+Posmatranjem razlika za GCC i LLVM na nivoima -O2 i -O3 za INT Speed programe (za testiranje brzine) utvrđeno je da 
+GCC ima prednost od 1\% do 4\% u odnosu na LLVM u slučaju većine programa na nivoima -O2 i -O3. 
+Stavke koje su uzete za test nemaju specifične žarišne tačke, pa se mogu smatrati sveobuhvatnim.
+
+Iz ovog testiranja se mogu izvesti sledeća zapažanja: \\
+
+-Rezultati testiranja pokazuju da je GCC uvek povoljan u pogledu optimizacije performansi. 
+Međutim u 2 specifična programa u vezi sa veštačkom inteligencijom LLVM poboljšava performanse za više od 3\% u odnosu na GCC. \\
+-LLVM optimizuje vektore na nivou -O2,  a GCC na -O3 nivou. \\
+-Osim vektorizovanih programa, GCC ne poboljšava performanse na nivou -O3, u poređenju sa onim na O2, dok LLVM značajno poboljšava performanse nekih programa na nivou O3. \\
+-U nekim slučajevima(na nivoima -O3 i više) GCC može poboljšati performanse , dok Clang ima problem sa tendencijom da previše odmotava petlje, što može dovesti do problema (ovde je rešenje koristiti optimizovanje za veličinu(-Os) da biste ograničili odmotavanje petlji).
+
+LLVM međukod je koncizniji i zauzima manje memorije tokom kompilacije od GCC međukoda
+Na osnovu urađenih testova, zaključeno je da Clang nudi više prednosti u procesu izgradnje velikih projekata od GCC-a. 
+GCC je skoro uvek povoljan u pogledu performansi, ali ipak zavisi od specifične aplikacije. %ref https://alibabatech.medium.com/gcc-vs-clang-llvm-an-in-depth-comparison-of-c-c-compilers-899ede2be378
+
+\subsection{Drugi primer testiranja razlika}
+\label{subsec:primer1}
+
+U većini nabrojanih  vrsta optimizacija u sekciji \ref{sec:podela} kao što su uvlačenje definicija funkcija, slaganje konstanti, propagacija konstanti, na testiranom konkretnom primeru oba kompajlera pokazala su se dobro.
+
+Neke razlike koje su primećene su: \\
+Kod odmotavanja petlji niza(eng. ~{\em loop unroling, array loops}) LLVM ne funkcioniše ispravno i komplikuje, dok GCC dobro radi. \\
+U slučaju indukcionih promenljivih sa float izrazima  ili sa integer izrazima (koji nisu nizovi elemenata) GCC ne može da radi, a LLVM radi. Takođe važi i u slučaju više akumulatora (integer ili float).\\
+U ovom slučaju GCC nije radio ni za algebarsku redukciju primenom asocijativnosti, dok LLVM jeste.
+
+% ref (str 76/77 tabela).  %ref https://www.agner.org/optimize/optimizing_cpp.pdf
+
+%Dok je LLVM-ov Clang C/C++ kompajler tradicionalno bio poznat po bržim brzinama gradnje od GCC-a, 
+%u nedavnim izdanjima GCC-a brzine gradnje su poboljšane, a u nekim oblastima LLVM/Clang je usporen sa daljim prolazima optimizacije
+% i drugim poslovima koji su dodati njegovom rastućem kodu -base.  
+%MOZE DA SE DODA NEGDE ILI SAMO OBRISATI
 
 
 
-\subsection{... podnaslov}
-\label{subsec:podnaslovN}
-
-Ovde pišem tekst. 
 
 \section{n-ti naslov}
 \label{sec:naslovN}
