@@ -62,7 +62,7 @@
 \maketitle
 
 \abstract{
-Ovo se piše na kraju. }
+Optimizacije su važan deo u procesu poboljšanja performansi programa. Kompajleri imaju različite nivoe optimizacije. Koji kompajleri i koji nivoi optimizacije će se koristiti zavisi od programa koji se kompajlira. Važno je razumeti sličnosti i razlike između optimizacija koje su dostupne u okviru savremenih kompajlera. U ovom radu ćemo predstaviti vrste optimizacija, sa akcentom na one koje su dostupne u okviru kompajlera GCC, LLVM i Native Image. }
 \tableofcontents
 
 \newpage
@@ -70,10 +70,9 @@ Ovo se piše na kraju. }
 \section{Uvod}
 \label{sec:uvod}
 Optimizacija predstavlja tehniku transformacije dela programa,  tako da kod bude što je moguće efikasniji. 
-Za cilj ima poboljšanje performansi koda, a ne savršen rezultat ( uglavnom se ne može se reći da predstavlja pronalazak „optimalnog rešenja“ ). 
+Za cilj ima poboljšanje performansi koda, a ne savršen rezultat (uglavnom se ne može se reći da predstavlja pronalazak „optimalnog rešenja“ ). 
 Optimizacija je oblast u kojoj se danas vrši većina istraživanja kompajlera. 
-U okviru savremenih kompajlera dostupan je veliki broj optimizacija koje sve međusobno deluju na razne načine i imaju uticaj na kvalitet koda, veličinu koda, vreme kompilacije, potrošnju energije itd. Kompajleri obično obezbeđuju ograničen broj  standardnih optimizacionih nivoa, kao što su O1, -O2,-O3 i -Os. Na ovim nivoima ostvaruju se kompromisi između  različitih mera kao što su kvalitet koda, veličina koda i vreme kompilacije. 
-U ovom radu ćemo upravo predstaviti vrste optimizacija, sa akcentom na one koje su dostupne u okviru kompajlera GCC i LLVM. \cite{uvod}
+U okviru savremenih kompajlera dostupan je veliki broj optimizacija koje sve međusobno deluju na razne načine i imaju uticaj na kvalitet koda, veličinu koda, vreme kompilacije, potrošnju energije itd. Kompajleri obično obezbeđuju ograničen broj  standardnih optimizacionih nivoa, kao što su -O1, -O2,-O3 i -Os. Na ovim nivoima ostvaruju se kompromisi između  različitih mera kao što su kvalitet koda, veličina koda i vreme kompilacije. \cite{uvod}
 
 \section{Osnovna podela optimizacija}
 \label{sec:podela}
@@ -85,17 +84,17 @@ U ovom slučaju zahteva se detaljno poznavanje ciljne arhitekture, kao i asemble
 
 \subsection{Optimizacije međukoda}
 \label{subsec:optimizacija_međukod}
-U okviru optimizacije međukoda razlikujemo :\textbf{lokalne}, \textbf{globalne} i \textbf{međuproceduralne optimizacije}.
+U okviru optimizacije međukoda razlikujemo: \textbf{lokalne}, \textbf{globalne} i \textbf{međuproceduralne optimizacije}.
 
 \subsubsection{Lokalne optimizacije}
 \label{subsubsec:lokalne}
-Lokalne optimizacije služe za ubrzavanje malih delova neke funkcije i rade sa konketnim naredbama unutar osnovnog bloka(eng. basic block)  
+Lokalne optimizacije služe za ubrzavanje malih delova neke funkcije i rade sa konketnim naredbama unutar osnovnog bloka(eng. ~{\em  Control - flow})
 One su obično najlakše za izvođenje jer nije neophodno raditi analizu kontrole toka(eng. ~{\em  Control - flow}).  
 U nastavku navodimo neke od tehnika lokalne optimizacije koje se vrše nad međukodom. 
 
 \begin{itemize}
   \item \textbf{Eliminacija čestih podizraza (eng. ~{\em Common subexpression elimination} )} \newline
-  Podrazumeva izbegavanje izvračunavanja čestog izraza više puta(ako se javlja više od jednom). 
+  Podrazumeva izbegavanje izračunavanja čestog izraza više puta(ako se javlja više od jednom). 
   U slučaju da dve operacije daju isti rezultat, kažemo da su česte, pa je bolje izračunati izraz jednom i pozvati ga naredni put na mestu gde je neophodno.
 
   \item \textbf{Slaganje konstanti (eng. ~{\em Constant folding})} \newline
@@ -125,7 +124,7 @@ U nastavku navodimo neke od tehnika lokalne optimizacije koje se vrše nad među
 Predstavljaju optimizacije koje su slične lokalnim i koje možemo primeniti sa nekim dodatnim analizama.
 „Globalno“ u ovom slučaju ne znači u celom programu, već se optimizacije primenjuju na jednu po jednu funkciju. 
 Ova analiza je znatno moćnija od lokalne, ali dosta komplikovanija. 
-Mnoge lokalne optimizacije se  mogu se primenljivati i globalno, dok postoje i one koje se mogu primeniti samo na globalnom nivou.
+Mnoge lokalne optimizacije se  mogu se primenjivati i globalno, dok postoje i one koje se mogu primeniti samo na globalnom nivou.
 Neke globalne optimizacije date su u nastavku.
 
 \begin{itemize}
@@ -170,7 +169,7 @@ Ralikujemo sledeće tehnike optimizacija koda:
   Razlikujemo fazu odabira instrukcija, fazu alokacije registara i fazu raspoređivanja instrukcija.
   \item \textbf{Optimizacija upotrebom keša} \\
   Upotreba keša se zasniva na prostornoj i vremenskoj lokalnosti, a cilj je da postane što bolja.
-  Ako je nekoj memoriji skoro pristupano, vremenska podrazumeva da ce biti uskoro opet,a prostorna da ce i njeni susedni objekti biti uskoro korišćeni.
+  Ako je nekoj memoriji skoro pristupano, vremenska podrazumeva da će biti uskoro opet, a prostorna da će i njeni susedni objekti biti uskoro korišćeni.
  
 \end{itemize} 
 Postoje razne optimizacije koje se mogu sprovesti i na nivou izgenerisanog ciljnog koda. \cite{kkMVJ}
@@ -184,15 +183,15 @@ Postoje razne optimizacije koje se mogu sprovesti i na nivou izgenerisanog ciljn
 
 GCC je kompajler programskog jezika koji je razvio GNU, to je zvanični kompajler za GNU i Linux sisteme. Ričard Stolman (eng.~{\em Richard Stallman}) je 1984. godine pokrenuo GNU projekat koji je imao za cilj izgradnju softverskog sistema otvorenog koda sličnog UNIKS-u. GNU operativni sistem se nije razvijao kako se očekivalo. Međutim, razvili su se mnogi odlični i korisni softverski alati otvorenog koda, kao što su Make, Emacs, GDB i GCC. \cite{gccVsClang}
 
-GCC prevodi program, ukoliko nema sintaksnih grešaka, kreiraće se izvršni fajl, u suprotnom će prevodilac ispisati poruke o greškama i broj linija u kodu gde se te greške nalaze. Takođe gcc ima veliki broj opcija kojima se mogu podesiti parametri prevođenja. Opcijom -o se zadaje ime izvršnog programa, opcije -Wall, -Wextra se koriste za generisanje poruka o upozorenjima, kada postoije konstrukcije koje su sintaksno ispravne, ali mogu da budu semantički neispravne. Opcije koje su vrlo značajne u procesu kompilacije, su opcije za optimizaciju. Kao i kod opcija za upozorenja i kod opcija za optimizacijuje moguće je precizno definisati koje se sve optimizacije vrše ili se moze zadati neka od grupnih opcija koje podržavaju veći broj optimizacija. Nivo optimizacije koju kompajler vrši se kontroliše opcijom -On, gde je n nivo zahtevane optimizacije. Promena ove vrednosti će zahtevati više vremena za kompilaciju koda i koristiće mnogo više memorije, posebno kako se povećava nivo optimizacije. \cite{gnuSamardzic} Neke optimizacije smanjuju veličinu rezultujućeg koda, dok druge pokušavaju da kreiraju brzi kod, potencijalno povećavajući njegovu veličinu. Postoji osam -O podesavanja: \textbf{-O0, -O1, -O2, -O3, -Os, -Oz, -Og, -Ofast}.
+GCC prevodi program, ukoliko nema sintaksnih grešaka, kreiraće se izvršni fajl, u suprotnom će prevodilac ispisati poruke o greškama i broj linija u kodu gde se te greške nalaze. Takođe, gcc ima veliki broj opcija kojima se mogu podesiti parametri prevođenja. Opcijom -o se zadaje ime izvršnog programa, opcije -Wall, -Wextra se koriste za generisanje poruka o upozorenjima, kada postoje konstrukcije koje su sintaksno ispravne, ali mogu da budu semantički neispravne. Opcije koje su vrlo značajne u procesu kompilacije, su opcije za optimizaciju. Kao i kod opcija za upozorenja i kod opcija za optimizaciju je moguće je precizno definisati koje se sve optimizacije vrše ili se moze zadati neka od grupnih opcija koje podržavaju veći broj optimizacija. Nivo optimizacije koju kompajler vrši se kontroliše opcijom -On, gde je n nivo zahtevane optimizacije. Promena ove vrednosti će zahtevati više vremena za kompilaciju koda i koristiće mnogo više memorije, posebno kako se povećava nivo optimizacije. \cite{gnuSamardzic} Neke optimizacije smanjuju veličinu rezultujućeg koda, dok druge pokušavaju da kreiraju brži kod, potencijalno povećavajući njegovu veličinu. Postoji osam -O podesavanja: \textbf{-O0, -O1, -O2, -O3, -Os, -Oz, -Og, -Ofast}.
 \begin{itemize}
 \item \textbf{O0 nivo optimizacije:} Na ovom nivou optimizacija je potpuno isključena. Ako se ne navede -O opcija, ovo je podrazumevani nivo optimizacije. Ovaj nivo značajno smanjuje vreme kompilacije i poboljšava informacije o otklanjanju grešaka. Neki programi ne rade ispravno bez nekog nivoa optimizacije, pa se ovaj nivo ne preporučuje.
 \item \textbf{O1 nivo optimizacije:} Optimizacije koje se vrše na ovom nivou imaju dva cilja, koji nekad mogu da budu suprotstavljeni, smanjenje veličine koda koji se kompajlira, uz povećanje njegovih performansi. Optimizacije obično ne zahtevaju značajnu količinu vremena da bi se izvršile.
 \item \textbf{O2 nivo optimizacije:} Preporučeni nivo optimizacije. Kompajler pokušava da poveća performanse koda bez ugrožavanja veličine samog koda i bez uzimanja previše vremena za kompilaciju.
 \item \textbf{O3 nivo optimizacije:} Ovo je najviši nivo optimizacije. Na ovom nivou naglasak je na brzini kompajliranja, a ne na veličini generisanog koda. Ovde je omogućena i optimizacija inline-funkcija, što povećava performanse, ali može da poveća veličinu samog koda, što zavisi od veličine funkcija koje su umetnute. Kompajliranje na ovom nivou ne garantuje povećanje performansi, zapravo, često sistem može da se uspori zbog većih binarnih datoteka i povećane upotrebe memorije. Ovaj nivo optimizacije se ne preporučuje.
-\item \textbf{Os nivo optimizacije:} Na ovom nivou se vrše sve optimizacije kao i na nivou -O2, koje ne povećavaju veličinu koda, kao što su optimizacije poravnjanja. Ovde je stavljen naglasak na veličinu, a ne na brzinu generisanog koda.
-\item \textbf{Og nivo optimizacije:} Ovaj nivo optimizacije je uveden u 4.8 standardu. Na ovom nivou naglasak je na brzini kompajliranja i na otklanjanju grešaka, dok se istovremeno pruža određenji nivo performansi.
-\item \textbf{Ofast nivo optimizacije:} Ovaj nivo je uvede u 4.7 standardu. Na ovom nivou se vrše sve optimizacije kao i na nivou -O3 plus \textbf{-ffast-math, -fno-protect-parens i -fstack-arrais}. \cite{gccOptions}
+\item \textbf{Os nivo optimizacije:} Na ovom nivou se vrše sve optimizacije kao i na nivou -O2, koje ne povećavaju veličinu koda, kao što su optimizacije poravnanja. Ovde je stavljen naglasak na veličinu, a ne na brzinu generisanog koda.
+\item \textbf{Og nivo optimizacije:} Ovaj nivo optimizacije je uveden u 4.8 standardu. Na ovom nivou naglasak je na brzini kompajliranja i na otklanjanju grešaka, dok se istovremeno pruža određeni nivo performansi.
+\item \textbf{Ofast nivo optimizacije:} Ovaj nivo je uveden u 4.7 standardu. Na ovom nivou se vrše sve optimizacije kao i na nivou -O3 plus \textbf{-ffast-math, -fno-protect-parens i -fstack-arrais}. \cite{gccOptions}
 \end{itemize}
 
 Naredni program se koristi za demonstraciju efekata različitih nivoa optimizacije:
@@ -238,9 +237,9 @@ Glavni program sadrži petlju koja poziva funkciju powern, koja računa n-ti ste
 
 LLVM je projakat otvorenog koda koji je razvio Kris Latner (eng.~{\em Chris Lattner}), kao istraživački projekat na Univerzitetu Ilinois. LLVM je zvanični naziv koji je primenljiv na sve projekte pod LLVM, koji zajedno čine potpun kompajler: prednji, srednji i zadnji deo, optimizatore, asemblere, linkere, libc++ i druge komponente. Pomaže u izgradnji novih računarskih jezika i poboljšanju postojećih. Automatizuje teške i neprijatne zadatke koji su uključeni u kreiranje jezika, kao što je prenos izlaznog koda na više platformi i arhitektura, LLVM je zapravo okvir za generisanje objektnog koda iz bilo koje vrste izvornog koda. LLVM ne vrši samo kompajliranje IR u izvorni mašinski kod, takođe može da vrši optimizaciju koda. Optimizacije mogu biti prilično agresivne, uključujuci stvari kao što su umetanje funkcija, eliminisanje mrtvog koda i odmotavanje petlji. \cite{llvm1} \cite{gccVsClang}
 
-Alat opt vrši analizu i optimizaciju koda. Uzima ulazne llvm datoteke kao ulaz, pokreće optimizacije ili analize i na kraju vraća optimizovanu datoteku ili rezultate analize. Ukoliko je zadata opcija -analyze, opt pokreće različite analize nad ulazom. Ukoliko opcija  -analize nije data, opt vrši optimizacije i pokušava da proizvede optimizovanu izlaznu datoteku. Optimizacije su zadate u vidu prolaza, koji prelaze neki deo programa da bi prikupili informacije ili transformisali program. Alat opt može da pokrene samo odabrane optimizacije, u određenom redosledu, tako što se pri pokretanju alata zadaju imena tih prolaza u željenom redosledu. Svi LLVM prolazi su podklase klase Pass, funkcionalnosti prolaza su implementirane tako što prevazilaze virtuelne metode nasleđene od klase Pass. Analysis passes se koriste za prikupljanje informacija koje mogu da služe za otklanjanje grešaka ili vizuelizaciju programa. Transform passes se koriste za optimizaciju koda. Utility Passes služe za dobijanje raznih informacija, koje su bitne za razvoj drugih prolaza. Nakon svakog prolaza IR mora da bude u validnom stanju.
+Alat opt vrši analizu i optimizaciju koda. Uzima ulazne llvm datoteke kao ulaz, pokreće optimizacije ili analize i na kraju vraća optimizovanu datoteku ili rezultate analize. Ukoliko je zadata opcija -analyze, opt pokreće različite analize nad ulazom. Ukoliko opcija  -analize nije data, opt vrši optimizacije i pokušava da proizvede optimizovanu izlaznu datoteku. Optimizacije su zadate u vidu prolaza, koji prelaze neki deo programa da bi prikupili informacije ili transformisali program. Alat opt može da pokrene samo odabrane optimizacije, u određenom redosledu, tako što se pri pokretanju alata zadaju imena tih prolaza u željenom redosledu. Svi LLVM prolazi su podklase klase Pass, funkcionalnosti prolaza su implementirane tako što prevazilaze virtuelne metode nasleđene od klase Pass. Analysis Passes se koriste za prikupljanje informacija koje mogu da služe za otklanjanje grešaka ili vizuelizaciju programa. Transform Passes se koriste za optimizaciju koda. Utility Passes služe za dobijanje raznih informacija, koje su bitne za razvoj drugih prolaza. Nakon svakog prolaza IR mora da bude u validnom stanju.
 
-Postoje sedam -O nivoa optimizacije: 
+Postoji sedam -O nivoa optimizacije: 
 \begin{itemize}
 \item \textbf{O0 nivo optimizacije:} Na ovom nivou, optimizacija je potpuno isključena. Ovo je podrazumevani nivo optimizacije i na ovom nivou kod se najbrže kompajlira.
 \item \textbf{O1 nivo optimizacije:} Najosnovniji nivo optimizacije 
@@ -252,13 +251,13 @@ Postoje sedam -O nivoa optimizacije:
 \end{itemize}
 
 
-\section{Različite optimizacije u okviru kompajlera \\ GCC/LLVM}
+\section{Različite optimizacije u okviru kompajlera GCC/LLVM}
 \label{subsec:razlike}
 
 U odnosu na namenu svakog od ovih kompajlera  i opseg programa za koje su specifikovani, određuje se i koji je bolji za optimizaciju u nekim konkretnim slučajevima.
 Karakteristike kompajlera koje određuju njihovu oblast upotrebe pa samim tim i optimizacije su: 
 \begin{itemize}
-  \item \textbf{GCC} podržava tradicionaldne jezike kao što su Ada, Fortran i GO.
+  \item \textbf{GCC} podržava tradicionalne jezike kao što su Ada, Fortran i GO.
          GCC podržava manje popularne arhitekture, kao i RISC-V ranije u odnosu na LLVM.
          Trenutno je brži od LLVM-a u  kompajliranju LINUX kernela. 
          U slučaju korišćenja LLVM-a , kernel se ne može kompajlirati bez modifikacije izvornog koda i parametara kompilacije.
@@ -289,7 +288,7 @@ Iz ovog testiranja se mogu izvesti sledeća zapažanja:
 \item Rezultati testiranja pokazuju da je GCC uvek povoljan u pogledu optimizacije performansi. 
 Međutim u 2 specifična programa u vezi sa veštačkom inteligencijom LLVM poboljšava performanse za više od 3\% u odnosu na GCC. 
 \item LLVM optimizuje vektore na nivou -O2,  a GCC na -O3 nivou. 
-\item Osim vektorizovanih programa, GCC ne poboljšava performanse na nivou -O3, u poređenju sa onim na O2, dok LLVM značajno poboljšava performanse nekih programa na nivou O3. 
+\item Osim vektorizovanih programa, GCC ne poboljšava performanse na nivou -O3, u poređenju sa onim na -O2, dok LLVM značajno poboljšava performanse nekih programa na nivou -O3. 
 \item U nekim slučajevima(na nivoima -O3 i više) GCC može poboljšati performanse , dok Clang ima problem sa tendencijom da previše odmotava petlje, što može dovesti do problema (ovde je rešenje koristiti optimizovanje za veličinu(-Os) da biste ograničili odmotavanje petlji).
 \end{itemize}
 
@@ -312,7 +311,7 @@ Neke razlike koje su primećene su:
 \subsection{Razlike u nivoima optimizacije}
 \label{subsec:nivoiRazlika}
 Kompajleri GCC i LLVM imaju po sedam nivoa optimizacije, sa manjim ili većim razlikama. 
-Optimizacije koje se vrse na nivoima -O0 i -O1 su identične. Kod gcc kompajlera nivo -O2 je preporučeni nivo optimizacije, dok je kod llvm kompajlera ovo umereni nivo optimizacije. -Os nivo optimizacije kod gcc kompajlera aktivira sve -O2 optimizacije koje ne povećavaju veličinu generisanog koda, dok kod llvm kompajlera ovaj nivo aktivira sve -O2 optimizacije koje smanjuju veličinu koda. -Oz i -O4 nivoi optimizacije postoje samo kod llvm kompajlera. -O4 nivo je najviši nivo optimizacije kod llvm kompajlera, dok je kod gcc kompajlera to -O3 nivo. Ovo nisu preporučeni nivoi optimizacije. Nivoi -Og i -Ofast se javljaju samo kod gcc kompajlera.
+Optimizacije koje se vrše na nivoima -O0 i -O1 su identične. Kod gcc kompajlera nivo -O2 je preporučeni nivo optimizacije, dok je kod llvm kompajlera ovo umereni nivo optimizacije. -Os nivo optimizacije kod gcc kompajlera aktivira sve -O2 optimizacije koje ne povećavaju veličinu generisanog koda, dok kod llvm kompajlera ovaj nivo aktivira sve -O2 optimizacije koje smanjuju veličinu koda. -Oz i -O4 nivoi optimizacije postoje samo kod llvm kompajlera. -O4 nivo je najviši nivo optimizacije kod llvm kompajlera, dok je kod gcc kompajlera to -O3 nivo. Ovo nisu preporučeni nivoi optimizacije. Nivoi -Og i -Ofast se javljaju samo kod gcc kompajlera.
 \\
 
 \vspace{2em}
