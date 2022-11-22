@@ -60,8 +60,7 @@
 
 \maketitle
 
-\abstract{
-Ovo se piše na kraju. }
+\abstract{Optimizacije su važan deo u procesu poboljšanja performansi programa. Kompajleri imaju različite nivoe optimizacije. Koji kompajleri i koji nivoi optimizacije će se koristiti zavisi od programa koji se kompajlira. Važno je razumeti sličnosti i razlike između optimizacija koje su dostupne u okviru savremenih kompajlera. U ovom radu ćemo predstaviti vrste optimizacija, sa akcentom na one koje su dostupne u okviru kompajlera GCC, LLVM i Native Image.}
 \tableofcontents
 
 \newpage
@@ -69,10 +68,9 @@ Ovo se piše na kraju. }
 \section{Uvod}
 \label{sec:uvod}
 Optimizacija predstavlja tehniku transformacije dela programa,  tako da kod bude što je moguće efikasniji. 
-Za cilj ima poboljšanje performansi koda, a ne savršen rezultat ( uglavnom se ne može se reći da predstavlja pronalazak „optimalnog rešenja“ ). 
+Za cilj ima poboljšanje performansi koda, a ne savršen rezultat ( uglavnom se ne može reći da predstavlja pronalazak „optimalnog rešenja“ ). 
 Optimizacija je oblast u kojoj se danas vrši većina istraživanja kompajlera. 
-U okviru savremenih kompajlera dostupan je veliki broj optimizacija koje sve međusobno deluju na razne načine i imaju uticaj na kvalitet koda, veličinu koda, vreme kompilacije, potrošnju energije itd. Kompajleri obično obezbeđuju ograničen broj  standardnih optimizacionih nivoa, kao što su O1, -O2,-O3 i -Os. Na ovim nivoima ostvaruju se kompromisi između  različitih mera kao što su kvalitet koda, veličina koda i vreme kompilacije. 
-U ovom radu ćemo upravo predstaviti vrste optimizacija, sa akcentom na one koje su dostupne u okviru kompajlera GCC i LLVM. \cite{uvod}
+U okviru savremenih kompajlera dostupan je veliki broj optimizacija koje sve međusobno deluju na razne načine i imaju uticaj na kvalitet koda, veličinu koda, vreme kompilacije, potrošnju energije itd. Kompajleri obično obezbeđuju ograničen broj  standardnih optimizacionih nivoa, kao što su O1, -O2,-O3 i -Os. Na ovim nivoima ostvaruju se kompromisi između  različitih mera kao što su kvalitet koda, veličina koda i vreme kompilacije. \cite{uvod}
 
 \section{Osnovna podela optimizacija}
 \label{sec:podela}
