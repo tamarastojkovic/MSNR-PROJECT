@@ -1,0 +1,236 @@
+
+
+ % !TEX encoding = UTF-8 Unicode
+
+\documentclass[a4paper]{report}
+
+\usepackage[T2A]{fontenc} % enable Cyrillic fonts
+\usepackage[utf8x,utf8]{inputenc} % make weird characters work
+\usepackage[serbian]{babel}
+%\usepackage[english,serbianc]{babel}
+\usepackage{amssymb}
+
+\usepackage{color}
+\usepackage{url}
+\usepackage[unicode]{hyperref}
+\hypersetup{colorlinks,citecolor=green,filecolor=green,linkcolor=blue,urlcolor=blue}
+
+\newcommand{\odgovor}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\title{Dopunite naslov svoga rada\\ \small{Dopunite autore rada}}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Uputstva}
+\emph{Prilikom predavanja odgovora na recenziju, obrišite ovo poglavlje.}
+
+Neophodno je odgovoriti na sve zamerke koje su navedene u okviru recenzija. Svaki odgovor pišete u okviru okruženja \verb"\odgovor", \odgovor{kako bi vaši odgovori bili lakše uočljivi.} 
+\begin{enumerate}
+
+\item Odgovor treba da sadrži na koji način ste izmenili rad da bi adresirali problem koji je recenzent naveo. Na primer, to može biti neka dodata rečenica ili dodat pasus. Ukoliko je u pitanju kraći tekst onda ga možete navesti direktno u ovom dokumentu, ukoliko je u pitanju duži tekst, onda navedete samo na kojoj strani i gde tačno se taj novi tekst nalazi. Ukoliko je izmenjeno ime nekog poglavlja, navedite na koji način je izmenjeno, i slično, u zavisnosti od izmena koje ste napravili. 
+
+\item Ukoliko ništa niste izmenili povodom neke zamerke, detaljno obrazložite zašto zahtev recenzenta nije uvažen.
+
+\item Ukoliko ste napravili i neke izmene koje recenzenti nisu tražili, njih navedite u poslednjem poglavlju tj u poglavlju Dodatne izmene.
+\end{enumerate}
+
+Za svakog recenzenta dodajte ocenu od 1 do 5 koja označava koliko vam je recenzija bila korisna, odnosno koliko vam je pomogla da unapredite rad. Ocena 1 označava da vam recenzija nije bila korisna, ocena 5 označava da vam je recenzija bila veoma korisna. 
+
+NAPOMENA: Recenzije ce biti ocenjene nezavisno od vaših ocena. Na osnovu recenzije ja znam da li je ona korisna ili ne, pa na taj način vama idu negativni poeni ukoliko kažete da je korisno nešto što nije korisno. Vašim kolegama šteti da kažete da im je recenzija korisna jer će misliti da su je dobro uradili, iako to zapravo nisu. Isto važi i na drugu stranu, tj nemojte reći da nije korisno ono što jeste korisno. Prema tome, trudite se da budete objektivni. 
+\chapter{Recenzent \odgovor{--- ocena:} }
+
+
+\section{O čemu rad govori?}
+% Напишете један кратак пасус у којим ћете својим речима препричати суштину рада (и тиме показати да сте рад пажљиво прочитали и разумели). Обим од 200 до 400 карактера.
+
+Uvodni deo rada bavi se opštim delom teme optimizacija, gde je predstavljena definicija pojma optimizacije i čemu one služe. Naredni deo uvoda se bavi njihovom podelom. Definisana podela optimizacija je izvršena na osnovu vremena izvršavanja, a najveći akcenat je na optimizacijama medjukoda. Detaljno su opisane sve vrste optimizacija, zajedno sa nivoima i performansama koje se ostvaruju.
+
+Dalji deo rada ulazi u srž ove teme. Prelazi se na konkretne opise GCC i LLVM kompajlera, gde je posvecena pažnja i jednom i drugom kompajleru i istaknute su najbitnije stavke koje važe za njih. Detaljno i precizno su opisani nivoi optimizacija oba kompjalera, načini pozivanja i data je nekolicina primera radi ilustracije rada kompajlera. Istaknuto je i za koje programske jezike je bolje koristiti koji kompajler, uz date argumente. Kako bi se razlike izmedju njih videle što bolje, dodato je i par primera testiranja koji su detaljno opisani, a za kraj poredjenja bačen je fokus na nivoe optimizacija. 
+
+Krajnji deo rada je fokusiran na temu Native Image kompajlera kod koje su pojašnjene njene specifičnosti i tehnike koje koristi. Dodate su i mane i problemi u vezi Native Image-a, čime se na lep nacin ističu i njegove mane u odnosu na prethodne kompajlere.
+
+Zaključak, kratak i jasan, govori o bitnosti optimizacija i razlozima zašto se koriste. 
+
+
+
+
+\section{Krupne primedbe i sugestije}
+% Напишете своја запажања и конструктивне идеје шта у раду недостаје и шта би требало да се промени-измени-дода-одузме да би рад био квалитетнији.
+
+Pohvala za pažnju koja je usmerena ka uvodnom delu rada, gde su detaljno opisane optimizacije i njihova podela, kao i ravnomerno rasporedjena objašnjenja većine stavki u podelama. S time rečeno, u uvodnom delu su po mom mišljenju mogle biti malo vise objašnjene i druge dve stavke u podeli optimizacija, pored optimizacije medjukoda, a u okviru optimizacija medjukoda fali mi definicija medjuproceduralnih optimizacija i malo bolje pojašnjenje istih. 
+
+Glavni deo seminarskog u kome je razradjena sama tema je super odradjen. Sažet i detaljan opis GCC kompajlera je prikladan. Bilo bi super da su i za LLVM prikazane slike performansi kao i za GCC(\textsc{Strana 6} u seminarskom radu). Testovi koji su obavljeni nad oba kompajlera su mogli biti dopunjeni nekim grafikonom, kako bi se dobio i vizuelni utisak o celoj priči.
+
+Poslednji deo teme koji se tiče Native Image-a bi trebalo još malo razraditi, kako bi se dobilo bolje poredjenje sa prethodna dva kompajlera. 
+
+Preporuka za dodavanje dela priče o llvm-gcc komandi kao spoj izmedju LLVM-a i GCC-a.
+
+
+\section{Sitne primedbe}
+% Напишете своја запажања на тему штампарских-стилских-језичких грешки
+Gramatickih gresaka skoro da nema, i stil pisanja je i vise nego zadovoljavajuc.
+
+\begin{itemize}
+    \item Na strani 5, gde se govori o nivoima optimizacije, ponavlja se sličan koncept rečenica za svaku stavku. Možda je bilo bolje postaviti nivoe u tabelu i štiklirati osobine koje važe za koji nivo, da bi se izbeglo ponavljanje fraza \textit{"Na ovom nivou","Ovaj nivo"}.
+    \item Strana 6, prva slika ne sadrži nikakav \textit{caption}.
+    \item Strana 10, štur opis slike, potreban kratak opis.
+    \item Par gramatičkih grešaka, gde su u pitanju š,č itd.
+    \item Korišćeno je dosta stranih izraza, za neke bi trebalo dodati fusnote kao dodatno objasnjenje.
+    \item Izgled tabele bi se mogao popraviti, da širina ne odstupa od širine teksta.
+    \item Strana 7, opis nivoa -O1, fali tačka na kraju.
+    
+    
+\end{itemize}
+
+
+\section{Provera sadržajnosti i forme seminarskog rada}
+% Oдговорите на следећа питања --- уз сваки одговор дати и образложење
+
+\begin{enumerate}
+\item Da li rad dobro odgovara na zadatu temu?\\
+Rad je ispratio zadatu temu, kroz tekstualna objašnjenja, koja su dopunjena tabelama i slikama, radi boljeg razumevanja prikazanih statistika i optimizacionih tehnika.
+
+\item Da li je nešto važno propušteno?\\
+Nije propušteno ništa važno. U tekstu iznad su date kritike, koji delovi bi se mogli dopuniti, kako bi se rad zaokružio kao celina.
+
+\item Da li ima suštinskih grešaka i propusta?\\
+Suštinske greške nisu primećene. Rad je opisan adekvatno, uz neke manje nedostatke.
+
+\item Da li je naslov rada dobro izabran?\\
+Naslov rada nije dobro postavljen i ne odgovara temi. Tema rada su većinski navedena tri kompajlera, prema tome su oni trebali stajati u naslovu.
+
+\item Da li sažetak sadrži prave podatke o radu?\\
+Sažetak je jasno napisan i odgovara temi.
+
+\item Da li je rad lak-težak za čitanje?\\
+Rad nije težak za čitanje i razumevanje. Tema i način pisanja su razumljivi, ali zbog dosta stranih izraza koji nisu objasnjeni, moglo bi doci otezavajucih okolnosti pri razumevanju.
+
+\item Da li je za razumevanje teksta potrebno predznanje i u kolikoj meri?\\
+Potrebno je osnovno predznanje koje se tiče kompajlera, kako bi se bolje shvatila tema koja je obradena. Tekst je dobro sastavljen, tako da bez velikih poteskoca se moze razumeti, bez velikog prethodnog iskustva sa datom temom.
+
+\item Da li je u radu navedena odgovarajuća literatura?\\
+U radu je navedena odgovarajuća literatura.
+
+\item Da li su u radu reference korektno navedene?\\
+Reference su korektno navedene.
+
+\item Da li je struktura rada adekvatna?\\
+Ispunjeni su svi uslovi koji se tiču strukture rada.
+
+\item Da li rad sadrži sve elemente propisane uslovom seminarskog rada (slike, tabele, broj strana...)?\\
+Nabrojani elementi za uslov seminarskog rada su ispoštovani.
+
+\item Da li su slike i tabele funkcionalne i adekvatne?\\
+Slike i tabele su funkcionalne, potrebno je malo ih bolje opisati.
+
+\end{enumerate}
+
+\section{Ocenite sebe}
+% Napišite koliko ste upućeni u oblast koju recenzirate: 
+% a) ekspert u datoj oblasti
+% b) veoma upućeni u oblast
+% c) srednje upućeni
+% d) malo upućeni 
+% e) skoro neupućeni
+% f) potpuno neupućeni
+% Obrazložite svoju odluku
+Srednje sam upućena u ovu temu, uz dodatak da sam je i sama istraživala radi svojih ličnih potreba. O oblastima GCC-a sam učila tokom studiranja na osnovnim studijama, a o kompajleru Native-Image sam učila tokom pisanja seminarskog rada "Optimizacije dostupne u okviru kompajlera
+Native Image" u sklopu ovog kursa, gde sam zajedno sa timom izučila njegove specifičnosti.
+
+\chapter{Recenzent \odgovor{--- ocena:} }
+
+
+\section{O čemu rad govori?}
+% Напишете један кратак пасус у којим ћете својим речима препричати суштину рада (и тиме показати да сте рад пажљиво прочитали и разумели). Обим од 200 до 400 карактера.
+U uvodnom delu se definiše šta predstavlja optimizacija, njene podele i u koje svrhe se koristi, kao i to koliko je danas pojam optimizacije široko rasprostranjen kada su kompajleri u pitanju i na kakav način sve mogu optimizovati kodove. Definisane su podele optimizacije u odnosu na vreme izvršavanja i detaljno su objašnjene pojedinosti loklanih, globalnih i međuproceduralnih optimizacija.
+
+Rad se dalje bavi naprednim optimizacijama u okviru kompajlera GCC i LLVM, gde se pored uopštenih informacija o ovim kompajlerima, detaljno i precizno opisuju nivoi optimizacije, način njihovog pozivanja i pojedinosti koje donose dati nivoi. 
+
+Zatim su na lep i jasan način prikazane razlike između GCC-a i LLVM-a, odnosno za koje programske jezike se upotrebljava jedan, a za koje drugi, kao i to zašto i u kojim specifičnim situacijama je bolje koristiti jedan kompajler u odnosu na drugi. Pored toga su prikazani i opisani rezultati testiranja primene oba kompajlera i to kakve su performanse prikazane u odnosu na to koji kompajler i koji nivo optimizacije je korišćen.
+Sve ove razlike i sličnosti su na transaprentan način prikazane kroz tabelu.
+
+Na kraju rada se uvodi pojam Native-Image kompajlera, gde se navode specifičnosti ovog tipa kompajlera, komponente od kojih je sačinjen, kao i optimizacije koje se primenjuju i koje su specifične za Native-Image kompajler.
+
+Zaključak ovog rada je lepo sažet i još jednom naglašava bitnost optimizacija i koliko su zapravo bitne za performanse izvršivog koda.
+
+
+\section{Krupne primedbe i sugestije}
+% Напишете своја запажања и конструктивне идеје шта у раду недостаје и шта би требало да се промени-измени-дода-одузме да би рад био квалитетнији.
+Pohvale za prikazivanje optimizacionih performansi u okviru kompajlera GCC direktno na primeru, gde se na osnovu nivoa optimizacije pri kompajliranju programa prikazuje dužina izvršavanja izvršivog fajla. Jedino što mi nije jasno je komentar da se brzina izvršavanja povećava sa povećanjem optimizacionog nivoa, dok se na screenshot-u terminala može videti kako se vreme izvršavanja koda smanjuje uz povećanje optimizacionog nivoa, ali pretpostavljam da je to lapsus. Drugih primedbi i sugestija nemam.
+
+\section{Sitne primedbe}
+% Напишете своја запажања на тему штампарских-стилских-језичких грешки
+Stil pisanja veoma dobar i precizan, uočio sam svega par grešaka koje su date ispod.
+
+\begin{itemize}
+    \item Na par mesta sam uočio pisanje karaktera otvorene zagrade i dvotačke odmah uz poslednji karakter prethodne reči koji može dovesti do pogrešnog prelamanja u slučaju promene teksta koji im prethodi.
+    \item Pod naslovom „Uvod“ u zagradi se nalazi rečenica gde se nalaze dva „se“ umesto jednog.
+    \item Na dva mesta sam primetio slovnu grešku u reči „može“ (promeniti z na ž).
+    \item Prelamanje jednog slova u novi red u reči „cilj“ (ci-lj).
+    \item U prvoj rečenici pod naslovom „Native-Image kompajler“ treba dodati predlog „na“ uz „specifičnoj platformi“, kako bi rečenica imala smisla.
+\end{itemize}
+
+
+\section{Provera sadržajnosti i forme seminarskog rada}
+% Oдговорите на следећа питања --- уз сваки одговор дати и образложење
+
+\begin{enumerate}
+\item Da li rad dobro odgovara na zadatu temu?\\
+Rad sasvim jasno i precizno opisuje zadatu temu, objašnjenja i poređenja su praćena praktičnim primerima, snimcima ekrana i tabelarnim prikazima koji doprinose boljem razumevanju teksta.
+
+\item Da li je nešto važno propušteno?\\
+Ja nisam uočio ništa važno što je propušteno i što bi moglo doprineti boljem kvalitetu rada.
+
+\item Da li ima suštinskih grešaka i propusta?\\
+Suštinske greške i propuste nisam primetio, sem ovog koji je opisan u odeljku primedbi i sugestija.
+
+\item Da li je naslov rada dobro izabran?\\
+Naslov rada koji mi je prosleđen na mejl za recenziju se ne podudara sa naslovom rada, ono što bih ja dodao u naslov jesu nazivi kompajlera na kojima je bio akcenat tokom pisanja, a to su GCC, LLVM i Native Image.
+
+\item Da li sažetak sadrži prave podatke o radu?\\
+Sažetak jasno opisuje teme koje su obrađene u radu.
+
+\item Da li je rad lak-težak za čitanje?\\
+Rad sam pročitao bez ikakvih problema, tako da bih rekao da je lak i jasan za čitanje i razumevanje.
+
+\item Da li je za razumevanje teksta potrebno predznanje i u kolikoj meri?\\
+Većina teksta je precizno i detaljno opisana kako bi ih mogli razumeti čitaoci različitog nivoa predznanja. Naravno da su neki detalji specifični i da bi ih osobe sa manjkom predznanja malo teže razumela, ali to je sasvim normalno i slažem se u potpunosti sa tim.
+
+\item Da li je u radu navedena odgovarajuća literatura?\\
+U radu je navedena odgovarajuća literatura.
+
+\item Da li su u radu reference korektno navedene?\\
+Ja nisam otkrio reference koje nisu korektno navedene.
+
+\item Da li je struktura rada adekvatna?\\
+Struktura rada mi deluje sasvim adekvatno i korektno.
+
+\item Da li rad sadrži sve elemente propisane uslovom seminarskog rada (slike, tabele, broj strana...)?\\
+Nabrojani elementi za uslov seminarskog rada su ispoštovani.
+
+\item Da li su slike i tabele funkcionalne i adekvatne?\\
+Slike i tabele su funkcionalne i čitljive.
+
+\end{enumerate}
+
+\section{Ocenite sebe}
+% Napišite koliko ste upućeni u oblast koju recenzirate: 
+% a) ekspert u datoj oblasti
+% b) veoma upućeni u oblast
+% c) srednje upućeni
+% d) malo upućeni 
+% e) skoro neupućeni
+% f) potpuno neupućeni
+% Obrazložite svoju odluku
+Smatram da sam srednje upućen u ovu temu, o oblastima GCC-a sam učio tokom studiranja na osnovnim studijama, a o komapjleru Native-Image sam učio tokom pisanja seminarskog rada "Optimizacije dostupne u okviru kompajlera
+Native Image" na ovom kursu, tako da smatram da imam osrednje znanje koje mi je bilo pomoglo da bih bez poteškoća razumeo sadržaj ovog rada.
+
+
+\chapter{Dodatne izmene}
+%Ovde navedite ukoliko ima izmena koje ste uradili a koje vam recenzenti nisu tražili. 
+
+\end{document}
