@@ -54,7 +54,7 @@
 
 \begin{document}
 
-\title{Optimizacije - ključ dobrih performansi\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
+\title{Optimizacije kao ključ dobrih performansi kroz GCC i LLVM\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 
 \author{Tamara Stojković, Emilija Stošić, Teodora Isailović \and tamara.stojkovic.1998@gmail.com, emilijazstosic@gmail.com, \and teodora.isailovic@gmail.com}
 \date{12.~novembar 2022.}
@@ -70,7 +70,7 @@ Optimizacije su važan deo u procesu poboljšanja performansi programa. Kompajle
 \section{Uvod}
 \label{sec:uvod}
 Optimizacija predstavlja tehniku transformacije dela programa,  tako da kod bude što je moguće efikasniji. 
-Za cilj ima poboljšanje performansi koda, a ne savršen rezultat (uglavnom se ne može se reći da predstavlja pronalazak „optimalnog rešenja“ ). 
+Za cilj ima poboljšanje performansi koda, a ne savršen rezultat (uglavnom se ne može reći da predstavlja pronalazak „optimalnog rešenja“ ). 
 Optimizacija je oblast u kojoj se danas vrši većina istraživanja kompajlera. 
 U okviru savremenih kompajlera dostupan je veliki broj optimizacija koje sve međusobno deluju na razne načine i imaju uticaj na kvalitet koda, veličinu koda, vreme kompilacije, potrošnju energije itd. 
 Kompajleri obično obezbeđuju ograničen broj  standardnih optimizacionih nivoa, kao što su -O1, -O2,-O3 i -Os. Na ovim nivoima ostvaruju se kompromisi između  različitih mera kao što su kvalitet koda, veličina koda i vreme kompilacije. \cite{uvod}
@@ -140,7 +140,7 @@ Neke globalne optimizacije date su u nastavku.
   \item \textbf{Optimizacija kretanje koda (eng. ~{\em Code motion})} \\
   Postoje optimizacije koje se mogu primeniti samo globalno i jedna takva je ova i ona objedinjuje sekvence koda zajedničke za jedan ili više blokova. 
   Cilj je smanjiti veličinu koda i eliminisati eventualna skupa ponovna izračunavanja. 
-  Dva oblika optimizacije izdizanjem koda koje ćemo izdvojiti su :
+  Dva oblika optimizacije izdizanjem koda koje ćemo izdvojiti su:
   \begin{itemize}
     \item \textbf{Pomeranje invarijantnog koda (eng. ~{\em loop-invariant})} \\
        Podrazumeva da se računanje vrednosti neke promenljive može izdvojiti izvan petlje, ako je nezavisno od brojača petlje.
@@ -164,7 +164,7 @@ Premalo uvlačenja dovodi do troškova vezanih za pozive funkcija, a previše uv
 Optimizovani međukod se u fazi generisanja koda prevodi u asemblerski tj. mašinski kod. 
 U finalnom generisanju koda, bitno je donošenje pametnih odluka kako bi generisani ciljni kod bio što efikasniji. 
 U ovom slučaju bitne su specifične karakteristike mašine za prozivodnju optimizovanog koda za tu konkretnu arhitekturu. 
-Razlikujemo sledeće tehnike optimizacija koda :
+Razlikujemo sledeće tehnike optimizacija koda:
 \begin{itemize}
   \item \textbf{Optimizacija redosleda instrukcija} \\
   Razlikujemo fazu odabira instrukcija, fazu alokacije registara i fazu raspoređivanja instrukcija.
@@ -195,7 +195,7 @@ GCC prevodi program, ukoliko nema sintaksnih grešaka, kreiraće se izvršni faj
 \item \textbf{Ofast nivo optimizacije:} Ovaj nivo je uveden u 4.7 standardu. Na ovom nivou se vrše sve optimizacije kao i na nivou -O3 plus \textbf{-ffast-math, -fno-protect-parens i -fstack-arrais}. \cite{gccOptions}
 \end{itemize}
 
-Naredni program se koristi za demonstraciju efekata različitih nivoa optimizacije :
+Naredni program se koristi za demonstraciju efekata različitih nivoa optimizacije:
 \newpage
 \begin{lstlisting}
 #include <stdio.h>
@@ -236,19 +236,19 @@ Glavni program sadrži petlju koja poziva funkciju powern, koja računa n-ti ste
 \subsection{Optimizacije u okviru kompajlera LLVM}
 \label{subsec:optimizacijeLLVM}
 
-LLVM je projakat otvorenog koda koji je razvio Kris Latner (eng.~{\em Chris Lattner}), kao istraživački projekat na Univerzitetu Ilinois. LLVM je zvanični naziv koji je primenljiv na sve projekte pod LLVM, koji zajedno čine potpun kompajler : prednji, srednji i zadnji deo, optimizatore, asemblere, linkere, libc++ i druge komponente. Pomaže u izgradnji novih računarskih jezika i poboljšanju postojećih. Automatizuje teške i neprijatne zadatke koji su uključeni u kreiranje jezika, kao što je prenos izlaznog koda na više platformi i arhitektura, LLVM je zapravo okvir za generisanje objektnog koda iz bilo koje vrste izvornog koda. LLVM ne vrši samo kompajliranje IR u izvorni mašinski kod, takođe može da vrši optimizaciju koda. Optimizacije mogu biti prilično agresivne, uključujuci stvari kao što su umetanje funkcija, eliminisanje mrtvog koda i odmotavanje petlji. \cite{llvm1} \cite{gccVsClang}
+LLVM je projakat otvorenog koda koji je razvio Kris Latner (eng.~{\em Chris Lattner}), kao istraživački projekat na Univerzitetu Ilinois. LLVM je zvanični naziv koji je primenljiv na sve projekte pod LLVM, koji zajedno čine potpun kompajler: prednji, srednji i zadnji deo, optimizatore, asemblere, linkere, libc++ i druge komponente. Pomaže u izgradnji novih računarskih jezika i poboljšanju postojećih. Automatizuje teške i neprijatne zadatke koji su uključeni u kreiranje jezika, kao što je prenos izlaznog koda na više platformi i arhitektura, LLVM je zapravo okvir za generisanje objektnog koda iz bilo koje vrste izvornog koda. LLVM ne vrši samo kompajliranje IR u izvorni mašinski kod, takođe može da vrši optimizaciju koda. Optimizacije mogu biti prilično agresivne, uključujuci stvari kao što su umetanje funkcija, eliminisanje mrtvog koda i odmotavanje petlji. \cite{llvm1} \cite{gccVsClang}
 
 Alat opt vrši analizu i optimizaciju koda. Uzima ulazne llvm datoteke kao ulaz, pokreće optimizacije ili analize i na kraju vraća optimizovanu datoteku ili rezultate analize. Ukoliko je zadata opcija -analyze, opt pokreće različite analize nad ulazom. Ukoliko opcija  -analize nije data, opt vrši optimizacije i pokušava da proizvede optimizovanu izlaznu datoteku. Optimizacije su zadate u vidu prolaza, koji prelaze neki deo programa da bi prikupili informacije ili transformisali program. Alat opt može da pokrene samo odabrane optimizacije, u određenom redosledu, tako što se pri pokretanju alata zadaju imena tih prolaza u željenom redosledu. Svi LLVM prolazi su podklase klase Pass, funkcionalnosti prolaza su implementirane tako što prevazilaze virtuelne metode nasleđene od klase Pass. Analysis Passes se koriste za prikupljanje informacija koje mogu da služe za otklanjanje grešaka ili vizuelizaciju programa. Transform Passes se koriste za optimizaciju koda. Utility Passes služe za dobijanje raznih informacija, koje su bitne za razvoj drugih prolaza. Nakon svakog prolaza IR mora da bude u validnom stanju.
 
-Postoji sedam -O nivoa optimizacije : 
+Postoji sedam -O nivoa optimizacije: 
 \begin{itemize}
-\item \textbf{O0 nivo optimizacije :} Na ovom nivou, optimizacija je potpuno isključena. Ovo je podrazumevani nivo optimizacije i na ovom nivou kod se najbrže kompajlira.
-\item \textbf{O1 nivo optimizacije :} Najosnovniji nivo optimizacije.
-\item \textbf{O2 nivo optimizacije :} Na ovom nivou je omogućena većina optimizacija, ovo je preporučeni nivo optimizacije.
-\item \textbf{O3 nivo optimizacije :} Na ovom nivou su dozvoljene sve optimizacije kao i na nivou -O2, sa dodatnim optimizacijama koje mogu generisati veći kod u cilju da se program brže pokrene.
-\item \textbf{O4 nivo optimizacije :} Ovo je najviši nivo optimizacije. Optimizacija celog programa se vrši u vreme povezivanja. 
-\item \textbf{Os nivo optimizacije :} Ovaj nivo optimizacije podržava sve optimizacije kao i nivo -O2, sa dodatnim optimizacijama za smanjenje veličine koda.
-\item \textbf{Oz nivo optimizacije :} Na ovom nivou su dozvoljene sve optimizacije kao i na nivou -Os, a samim tim i -O2,  sa dodatnim smanjenjem veličine koda. \cite{opt} \cite{pass} \cite{pass2}
+\item \textbf{O0 nivo optimizacije:} Na ovom nivou, optimizacija je potpuno isključena. Ovo je podrazumevani nivo optimizacije i na ovom nivou kod se najbrže kompajlira.
+\item \textbf{O1 nivo optimizacije:} Najosnovniji nivo optimizacije.
+\item \textbf{O2 nivo optimizacije:} Na ovom nivou je omogućena većina optimizacija, ovo je preporučeni nivo optimizacije.
+\item \textbf{O3 nivo optimizacije:} Na ovom nivou su dozvoljene sve optimizacije kao i na nivou -O2, sa dodatnim optimizacijama koje mogu generisati veći kod u cilju da se program brže pokrene.
+\item \textbf{O4 nivo optimizacije:} Ovo je najviši nivo optimizacije. Optimizacija celog programa se vrši u vreme povezivanja. 
+\item \textbf{Os nivo optimizacije:} Ovaj nivo optimizacije podržava sve optimizacije kao i nivo -O2, sa dodatnim optimizacijama za smanjenje veličine koda.
+\item \textbf{Oz nivo optimizacije:} Na ovom nivou su dozvoljene sve optimizacije kao i na nivou -Os, a samim tim i -O2,  sa dodatnim smanjenjem veličine koda. \cite{opt} \cite{pass} \cite{pass2}
 \end{itemize}
 
 
@@ -256,7 +256,7 @@ Postoji sedam -O nivoa optimizacije :
 \label{subsec:razlike}
 
 U odnosu na namenu svakog od ovih kompajlera  i opseg programa za koje su specifikovani, određuje se i koji je bolji za optimizaciju u nekim konkretnim slučajevima.
-Karakteristike kompajlera koje određuju njihovu oblast upotrebe pa samim tim i optimizacije su : 
+Karakteristike kompajlera koje određuju njihovu oblast upotrebe pa samim tim i optimizacije su: 
 \begin{itemize}
   \item \textbf{GCC} podržava tradicionalne jezike kao što su Ada, Fortran i GO.
          GCC podržava manje popularne arhitekture, kao i RISC-V ranije u odnosu na LLVM.
@@ -283,7 +283,7 @@ Posmatranjem razlika za GCC i LLVM na nivoima -O2 i -O3 za INT Speed programe (z
 GCC ima prednost od 1\% do 4\% u odnosu na LLVM u slučaju većine programa na nivoima -O2 i -O3. 
 Stavke koje su uzete za test nemaju specifične žarišne tačke, pa se mogu smatrati sveobuhvatnim.
 
-Iz ovog testiranja se mogu izvesti sledeća zapažanja : 
+Iz ovog testiranja se mogu izvesti sledeća zapažanja: 
 
 \begin{itemize} 
 \item Rezultati testiranja pokazuju da je GCC uvek povoljan u pogledu optimizacije performansi. 
@@ -302,7 +302,7 @@ GCC je skoro uvek povoljan u pogledu performansi, ali izbor ipak zavisi od speci
 
 U većini nabrojanih  vrsta optimizacija u sekciji \ref{sec:podela} kao što su uvlačenje definicija funkcija, slaganje konstanti, propagacija konstanti, na testiranom konkretnom primeru oba kompajlera pokazala su se dobro.
 
-Neke razlike koje su primećene su : 
+Neke razlike koje su primećene su: 
 \begin{itemize}
 \item Kod odmotavanja petlji niza (eng. ~{\em loop unroling, array loops}) LLVM ne funkcioniše ispravno i komplikuje, dok GCC dobro radi. 
 \item U slučaju indukcionih promenljivih sa float izrazima  ili sa integer izrazima (koji nisu nizovi elemenata) GCC ne može da radi, a LLVM radi. Takođe važi i u slučaju više akumulatora (integer ili float).
