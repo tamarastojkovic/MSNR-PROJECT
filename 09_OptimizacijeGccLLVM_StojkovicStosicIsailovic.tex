@@ -16,6 +16,9 @@
 \usepackage{listings}
 \usepackage{booktabs}
 
+\usepackage{caption}
+\captionsetup{width=.85\textwidth}
+
 %\newtheorem{primer}{Пример}[section] %ćirilični primer
 \newtheorem{primer}{Primer}[section]
 
@@ -364,14 +367,14 @@ Optimizacije koje se vrše na nivoima -O0 i -O1 su identične. Kod GCC kompajler
 \section{Native-Image kompajler}
 \label{sec:natImg}
 
-Neke od glavnih prednosti softvera pisanog u jezicima koji se prevode specifično platformi je
+Neke od glavnih prednosti softvera pisanog u jezicima koji se prevode na specifičnoj platformi je
 brzina pokretanja i manja količina neophodnih resursa. Takav softver se izvršava direktno na
 procesoru, a ne na virtualnoj mašini (apstrakciji procesora).
 
-Native-Image kompajleri predstavljaju tehniku ahead-of-time kompilacije od izvornog koda preko
-bytecode-a do izvršivog koda određene platforme i arhitekture, koji se 
+Native-Image kompajleri predstavljaju tehniku ahead-of-time kompilacije od izvornog koda, preko
+bytecode-a, do izvršivog koda određene platforme i arhitekture koji se 
 naziva \textbf{native image}. \cite{natImgGraal01}
-Najpoznatiji primeri su \textit{Native Image} iz GraalVM za jezike na JVM i
+Najpoznatiji primeri su \textit{Native Image} iz GraalVM za jezike koji se izvršavaju na Java virtuelnoj mašini (JVM) i
 \textit{Ngen} za .NET Framework, odnosno \textit{CrossGen} za .NET Core.
 U nastavku opisan je alat iz GraalVM.
 
@@ -380,15 +383,16 @@ komponente poput garbage collector-a. Takođe, sadrži i klase i pakete,
 runtime klase biblioteka i statički povezan mašinski kod. \cite{natImgGraal02}
 
 Originalni, čisti izvorni kod se prevodi do bytecode-a na poznat način.
-Image builder je zadužen za određivanje zavisnosti. Vrši se statička
-analizira dosežnosti klasa i metoda. Sav dosežan kod se zatim 
+Native Image builder je zadužen za određivanje zavisnosti. Vrši se statička
+analiza dosežnosti klasa i metoda. Sav dosežan kod se zatim 
 kompajlira ahead-of-time za ciljani operativni sistem i arhitekturu.
+Rezultujući kod se brže izvršava i zauzima manje memorije u odnosu na JVM. 
 
 \begin{figure}[h!]
   \begin{center}
-      \includegraphics[width=70mm]{./pics/alibaba_pic.jpg}
+      \includegraphics[width=105mm]{./pics/alibaba_pic.jpg}
   \end{center}
-  \caption {GraalVM}
+  \caption {Prikaz ubrzanja pri korišćenju Native Image kompajlera u odnosu na JVM}
   \label{fig:natImg-alibaba}
 \end{figure}
 
@@ -409,7 +413,7 @@ Svaka klasa kojoj se pristupa preko imena u runtime-u mora
 biti označena u build time-u.
 Da bi se razrešili svi elementi kojima se pristupa reflektivno,
 Native Image pokušava statičkom analizom da detektuje pozive 
-iz Reflection API.
+iz Reflection Application Programming Interface (API).
 
 Dynamic Proxy su podržani ahead-of-time. Statička analiza 
 jednostavno presreće pozive metoda newProxyInstance i 
