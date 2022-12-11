@@ -194,18 +194,18 @@ GCC je kompajler programskog jezika koji je razvio GNU, to je zvanični kompajle
 
 GCC prevodi program, ukoliko nema sintaksnih grešaka, kreiraće se izvršni fajl, u suprotnom će prevodilac ispisati poruke o greškama i broj linija u kodu gde se te greške nalaze. Takođe, gcc ima veliki broj opcija kojima se mogu podesiti parametri prevođenja. Opcijom -o se zadaje ime izvršnog programa, opcije -Wall, -Wextra se koriste za generisanje poruka o upozorenjima, kada postoje konstrukcije koje su sintaksno ispravne, ali mogu da budu semantički neispravne. Opcije koje su vrlo značajne u procesu kompilacije, su opcije za optimizaciju. Kao i kod opcija za upozorenja i kod opcija za optimizaciju moguće je precizno definisati koje se sve optimizacije vrše ili se može zadati neka od grupnih opcija koje podržavaju veći broj optimizacija. Nivo optimizacije koju kompajler vrši se kontroliše opcijom -On, gde je n nivo zahtevane optimizacije. Promena ove vrednosti će zahtevati više vremena za kompilaciju koda i koristiće mnogo više memorije, posebno kako se povećava nivo optimizacije. \cite{gnuSamardzic} Neke optimizacije smanjuju veličinu rezultujućeg koda, dok druge pokušavaju da kreiraju brži kod, potencijalno povećavajući njegovu veličinu. Postoji osam -O podesavanja: \textbf{-O0, -O1, -O2, -O3, -Os, -Oz, -Og, -Ofast}.
 \begin{itemize}
-\item \textbf{O0 nivo optimizacije:} Na ovom nivou optimizacija je potpuno isključena. Ako se ne navede -O opcija, ovo je podrazumevani nivo optimizacije. Ovaj nivo značajno smanjuje vreme kompilacije i poboljšava informacije o otklanjanju grešaka. Neki programi ne rade ispravno bez nekog nivoa optimizacije, pa se ovaj nivo ne preporučuje.
-\item \textbf{O1 nivo optimizacije:} Optimizacije koje se vrše na ovom nivou imaju dva cilja, koji nekad mogu da budu suprotstavljeni, smanjenje veličine koda koji se kompajlira, uz povećanje njegovih performansi. Optimizacije obično ne zahtevaju značajnu količinu vremena da bi se izvršile.
+\item \textbf{O0 nivo optimizacije:} Na ovom nivou optimizacija je potpuno isključena. Ako se ne navede -O opcija, ovo je podrazumevani nivo optimizacije. Značajno smanjuje vreme kompilacije i poboljšavaju se informacije o otklanjanju grešaka. Neki programi ne rade ispravno bez nekog nivoa optimizacije, pa se ovaj nivo ne preporučuje.
+\item \textbf{O1 nivo optimizacije:} Optimizacije koje se vrše imaju dva cilja, koji nekad mogu da budu suprotstavljeni, smanjenje veličine koda koji se kompajlira, uz povećanje njegovih performansi. Optimizacije obično ne zahtevaju značajnu količinu vremena da bi se izvršile.
 \item \textbf{O2 nivo optimizacije:} Preporučeni nivo optimizacije. Kompajler pokušava da poveća performanse koda bez ugrožavanja veličine samog koda i bez uzimanja previše vremena za kompilaciju.
-\item \textbf{O3 nivo optimizacije:} Ovo je najviši nivo optimizacije. Na ovom nivou naglasak je na brzini kompajliranja, a ne na veličini generisanog koda. Ovde je omogućena i optimizacija inline-funkcija, što povećava performanse, ali može da poveća veličinu samog koda, što zavisi od veličine funkcija koje su umetnute. Kompajliranje na ovom nivou ne garantuje povećanje performansi, zapravo, često sistem može da se uspori zbog većih binarnih datoteka i povećane upotrebe memorije. Ovaj nivo optimizacije se ne preporučuje.
-\item \textbf{Os nivo optimizacije:} Na ovom nivou se vrše sve optimizacije kao i na nivou -O2, koje ne povećavaju veličinu koda, kao što su optimizacije poravnanja. Ovde je stavljen naglasak na veličinu, a ne na brzinu generisanog koda.
-\item \textbf{Og nivo optimizacije:} Ovaj nivo optimizacije je uveden u 4.8 standardu. Na ovom nivou naglasak je na brzini kompajliranja i na otklanjanju grešaka, dok se istovremeno pruža određeni nivo performansi.
-\item \textbf{Ofast nivo optimizacije:} Ovaj nivo je uveden u 4.7 standardu. Na ovom nivou se vrše sve optimizacije kao i na nivou -O3 plus \textbf{-ffast-math, -fno-protect-parens i -fstack-arrais}. \cite{gccOptions}
+\item \textbf{O3 nivo optimizacije:} Najviši nivo optimizacije. Naglasak je na brzini kompajliranja, a ne na veličini generisanog koda. Omogućena je i optimizacija inline-funkcija, što povećava performanse, ali može da poveća veličinu samog koda, što zavisi od veličine funkcija koje su umetnute. Kompajliranje na ovom nivou ne garantuje povećanje performansi, zapravo, često sistem može da se uspori zbog većih binarnih datoteka i povećane upotrebe memorije. Nije preporučeno koristiti ovaj nivo optimizacije
+\item \textbf{Os nivo optimizacije:} Vrše se sve optimizacije kao i na nivou -O2, koje ne povećavaju veličinu koda, kao što su optimizacije poravnanja. Naglasak je stavljen na veličinu, a ne na brzinu generisanog koda.
+\item \textbf{Og nivo optimizacije:} Nivo optimizacije je uveden u 4.8 standardu. Ciljevi optimizacije su brzina kompajliranja i otklanjanje grešaka, dok se istovremeno pruža određeni nivo performansi.
+\item \textbf{Ofast nivo optimizacije:} Nivo je uveden u 4.7 standardu. Vrše se sve optimizacije kao i na nivou -O3 plus \textbf{-ffast-math, -fno-protect-parens i -fstack-arrais}. \cite{gccOptions}
 \end{itemize}
 
-Naredni program se koristi za demonstraciju efekata različitih nivoa optimizacije:
+Program \ref{fig:simple} se koristi za demonstraciju efekata različitih nivoa optimizacije:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Program za izračunavanje n-tog stepena brojeva},frame=single, label={fig:simple}]
 #include <stdio.h>
 
 double powern (double d, unsigned n)
@@ -235,7 +235,7 @@ Glavni program sadrži petlju koja poziva funkciju powern, koja računa n-ti ste
     \begin{center}
         \includegraphics[width=105mm, height=30mm]{pics/test.png}
     \end{center}
-    \caption {Rezultati optimizacije}
+    \caption {Rezultati optimizacije kod GCC kompajlera}
     \label{fig:Rezultati_optimizacije}
 
 \end{figure}
@@ -250,14 +250,27 @@ Alat opt vrši analizu i optimizaciju koda. Uzima ulazne llvm datoteke kao ulaz,
 
 Postoji sedam -O nivoa optimizacije: 
 \begin{itemize}
-\item \textbf{O0 nivo optimizacije:} Na ovom nivou, optimizacija je potpuno isključena. Ovo je podrazumevani nivo optimizacije i na ovom nivou kod se najbrže kompajlira.
+\item \textbf{O0 nivo optimizacije:} Na ovom nivou, optimizacija je potpuno isključena. Ovo je podrazumevani nivo optimizacije i kod se najbrže kompajlira.
 \item \textbf{O1 nivo optimizacije:} Najosnovniji nivo optimizacije.
-\item \textbf{O2 nivo optimizacije:} Na ovom nivou je omogućena većina optimizacija, ovo je preporučeni nivo optimizacije.
-\item \textbf{O3 nivo optimizacije:} Na ovom nivou su dozvoljene sve optimizacije kao i na nivou -O2, sa dodatnim optimizacijama koje mogu generisati veći kod u cilju da se program brže pokrene.
-\item \textbf{O4 nivo optimizacije:} Ovo je najviši nivo optimizacije. Optimizacija celog programa se vrši u vreme povezivanja. 
-\item \textbf{Os nivo optimizacije:} Ovaj nivo optimizacije podržava sve optimizacije kao i nivo -O2, sa dodatnim optimizacijama za smanjenje veličine koda.
-\item \textbf{Oz nivo optimizacije:} Na ovom nivou su dozvoljene sve optimizacije kao i na nivou -Os, a samim tim i -O2,  sa dodatnim smanjenjem veličine koda. \cite{opt} \cite{pass} \cite{pass2}
+\item \textbf{O2 nivo optimizacije:} Omogućena je većina optimizacija i ovo je preporučeni nivo optimizacije.
+\item \textbf{O3 nivo optimizacije:} Dozvoljene sve optimizacije kao i na nivou -O2, sa dodatnim optimizacijama koje mogu generisati veći kod u cilju da se program brže pokrene.
+\item \textbf{O4 nivo optimizacije:} Najviši nivo optimizacije. Optimizacija celog programa se vrši u vreme povezivanja. 
+\item \textbf{Os nivo optimizacije:} Podržane sve optimizacije kao i nivo -O2, sa dodatnim optimizacijama za smanjenje veličine koda.
+\item \textbf{Oz nivo optimizacije:} Dozvoljene sve optimizacije kao i na nivou -Os, a samim tim i -O2,  sa dodatnim smanjenjem veličine koda. \cite{opt} \cite{pass} \cite{pass2}
 \end{itemize}
+
+Program \ref{fig:simple} se može iskoristi i za demonstraciju efekta različitih nivoa optimizacije kod LLVM kompajlera. Sa slike \ref{fig:Rezultati_optimizacije2} se jasno vidi da se brzina izvršavanja programa smanjuje, kako se povećava nivo optimizacije.
+
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=105mm, height=30mm]{pics/test2.png}
+    \end{center}
+    \caption {Rezultati optimizacije kod LLVM kompajlera}
+    \label{fig:Rezultati_optimizacije2}
+
+\end{figure}
+
+\newpage
 
 
 \section{Različite optimizacije u okviru kompajlera GCC/LLVM}
