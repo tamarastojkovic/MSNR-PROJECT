@@ -129,13 +129,13 @@ Neke globalne optimizacije date su u nastavku.
 
 \begin{itemize}
   \item \textbf{Globalna eliminacija mrtvog koda} \newline
-  U ovom slučaju jedina razlika je što se informacije o tome gde je neka promenljiva živa, moraju dobiti globalnom analizom, što je značajno komplikuje u odnosu na lokalnu eliminaciju mrtvog koda.
+  U ovom slučaju jedina razlika je što se informacije o tome gde je neka promenljiva živa, moraju dobiti globalnom analizom, što se značajno komplikuje u odnosu na lokalnu eliminaciju mrtvog koda.
   \item \textbf{Globalno propagiranje konstante} \newline
   Ovo je optimizacija koja svaku promenljivu za koju se zna da je konstantna menja sa tom konstantom.
   Potrebno je pratiti vrednosti koje mogu biti dodeljene promenljivoj u svakoj tački programa. 
   \item \textbf{Globalna eliminacija čestih podizraza} \newline
   Česti podizrazi mogu se eliminisati  i na globalnom nivou, poznavanjem skupa dostupnih izraza.
-  Izrazi su dostupni u jednom trenutku ako su živi pri ulasku u blok, što se utvrđuje ospežnom analizom.
+  Izrazi su dostupni u jednom trenutku ako su živi pri ulasku u blok, što se utvrđuje opsežnom analizom.
   \item \textbf{Optimizacija kretanje koda (eng. ~{\em Code motion})} \\
   Postoje optimizacije koje se mogu primeniti samo globalno i jedna takva je ova i ona objedinjuje sekvence koda zajedničke za jedan ili više blokova. 
   Cilj je smanjiti veličinu koda i eliminisati eventualna skupa ponovna izračunavanja. 
