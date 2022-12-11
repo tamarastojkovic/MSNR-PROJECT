@@ -54,8 +54,7 @@
 
 \begin{document}
 
-\title{Optimizacije kao ključ dobrih performansi kroz GCC i LLVM\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
-
+\title{Optimizacije - ključ dobrih performansi\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 \author{Tamara Stojković, Emilija Stošić, Teodora Isailović \and tamara.stojkovic.1998@gmail.com, emilijazstosic@gmail.com, \and teodora.isailovic@gmail.com}
 \date{12.~novembar 2022.}
 
@@ -89,7 +88,7 @@ U okviru optimizacije međukoda razlikujemo: \textbf{lokalne}, \textbf{globalne}
 
 \subsubsection{Lokalne optimizacije}
 \label{subsubsec:lokalne}
-Lokalne optimizacije služe za ubrzavanje malih delova neke funkcije i rade sa konketnim naredbama unutar osnovnog bloka (eng. ~{\em  Control - flow}).
+Lokalne optimizacije služe za ubrzavanje malih delova neke funkcije i rade sa konketnim naredbama unutar osnovnog bloka.
 One su obično najlakše za izvođenje jer nije neophodno raditi analizu kontrole toka (eng. ~{\em  Control - flow}).  
 U nastavku navodimo neke od tehnika lokalne optimizacije koje se vrše nad međukodom. 
 
@@ -154,7 +153,8 @@ Neke globalne optimizacije date su u nastavku.
 
 \subsubsection{Međuproceduralne optimizacije}
 \label{subsubsec:međuproceduralne} 
-U okviru ove optimizacije jedna od najznačajnijih tehnika je \textbf{uvlačenje definicija funkcija (eng. ~{\em Inlining})}. 
+Međuproceduralna optimizacija radi na celokupnom grafu kontorle toka (eng. ~ {\em Control Flow Graph, CFG}) \footnote{Graf kontorle toka (eng. ~ {\em Control Flow Graph, CFG}) je graf koji sadrži osnovne blokove funkcije.} koji prati pozive funkcija i njihovu međusobnu interakciju. \cite{kkMVJ}
+Ova optimizacija se vrši na nivou celog programa tj. više funkcija. U okviru ove optimizacije jedna od najznačajnijih tehnika je \textbf{uvlačenje definicija funkcija (eng. ~{\em Inlining})}. 
 Uglavnom se jednostavnije funkcije uvlače, a složenije ne. 
 Premalo uvlačenja dovodi do troškova vezanih za pozive funkcija, a previše uveća veličinu koda i dovodi do neefikasnosti, pa treba uspostaviti ravnotežu. \cite{kkFM}
 
@@ -167,13 +167,21 @@ U ovom slučaju bitne su specifične karakteristike mašine za prozivodnju optim
 Razlikujemo sledeće tehnike optimizacija koda:
 \begin{itemize}
   \item \textbf{Optimizacija redosleda instrukcija} \\
-  Razlikujemo fazu odabira instrukcija, fazu alokacije registara i fazu raspoređivanja instrukcija.
+  Razlikujemo fazu odabira instrukcija, fazu alokacije registara i fazu raspoređivanja instrukcija. Ove 3 faze su veoma isprepletane, ali obično se najpre radi odabir instrukcija, 
+  dok se treća faza nekada vrši pre, a nekada posle druge faze. \\
+  Sekvenca instrukcija se obično može na više načina prevesti u asemblerski kod i instrukcija se može predstaviti drvetom. 
+  Nakon toga se svakoj asemblerskoj instrukciji pridružuju oblici drveta koji se mogu prekriti sa njom. 
+  \textbf{Odabir instrukcija } se vrši tako da se na osnovu tih šablona pokušava prekriti celo drvo.
+  \textbf{Alokacija registara } je proces dodeljivanja promenljivih registrima, kao i upravljanje prenosom podataka u registrima i van njih. 
+  Cilj je da što više promenljivih bude smešteno u registre procesora. 
+  Jedna česta tehnika za alokaciju registara je bojenje grafa.
+  \textbf{Raspoređivanje instrukcija} podrazumeva pravljenje rasopreda instrukcija, čiji je cilj poboljšanje performansi.
   \item \textbf{Optimizacija upotrebom keša} \\
   Upotreba keša se zasniva na prostornoj i vremenskoj lokalnosti, a cilj je da postane što bolja.
   Ako je nekoj memoriji skoro pristupano, vremenska podrazumeva da će biti uskoro opet, a prostorna da će i njeni susedni objekti biti uskoro korišćeni.
  
 \end{itemize} 
-Postoje razne optimizacije koje se mogu sprovesti i na nivou izgenerisanog ciljnog koda. \cite{kkMVJ}
+Postoje razne druge optimizacije koje se mogu sprovesti i na nivou izgenerisanog ciljnog koda. \cite{kkMVJ}
 
 
 \section{Napredne optimizacije u okviru kompajlera GCC/LLVM}
@@ -196,7 +204,7 @@ GCC prevodi program, ukoliko nema sintaksnih grešaka, kreiraće se izvršni faj
 \end{itemize}
 
 Naredni program se koristi za demonstraciju efekata različitih nivoa optimizacije:
-\newpage
+
 \begin{lstlisting}
 #include <stdio.h>
 
@@ -267,7 +275,7 @@ Karakteristike kompajlera koje određuju njihovu oblast upotrebe pa samim tim i 
           On takođe podržava neke ekstenzije, kao što su atributi za proveru bezbednosti niti.
           Ovaj kompilator omogućava tačnije i preciznije dijagnostičke informacije i poruke o greškama. U GCC-u su počele da se poboljšavaju od GCC-a 8.
           Clang obezbeđuje dodatne korisne alate za statičku analizu i skeniranje koda (scan-build, clang static analyzer, clang-format, clang-tidy).
-          Clang je kompajler  za C, C++, Objective-C, ili Objective-C++.
+          Clang je kompajler  za C, C++, Objective-C ili Objective-C++.
 \end{itemize}
 GCC se smatrao superiornijim, ali LLVM napreduje. Sada neki smatraju da se LLVM uglavnom koristi da obezbedi performanse superiornije od GCC-a.
 \\ Optimizacije su do sada postale jedna od osnovnih komponenti kompa\-jlera. 
