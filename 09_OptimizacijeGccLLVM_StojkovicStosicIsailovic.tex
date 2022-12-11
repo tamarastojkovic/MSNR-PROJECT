@@ -340,28 +340,28 @@ Optimizacije koje se vrše na nivoima -O0 i -O1 su identične. Kod GCC kompajler
 \\
 
 \vspace{2em}
-\hspace{-5em}
-\begin{tabular}{|c|c|c|}
-  \toprule
-   & \textbf{GCC} & \textbf{LLVM} \\
-  \midrule
+\hspace{-2em}
+\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}|  }
+    \hline
+        & \textbf{GCC} & \textbf{LLVM} \\
+    \hline
   \textbf{Modularnost koda} & Monolitičan & Modularan \\
-  \midrule
-  \textbf{Generisani} & Efikasan, & Efikasan, zbog korišćenja \\
-  \textbf{kod} & veliki broj opcija &  SSA forme na LLVM backend-u \\
-  \midrule
-  {} & Sporiji zbog oslanjanja  & Brži zbog integrisanja  \\  
-  \textbf{Brzina} & na nezavisne kompajlere.  & sopstvenih kompajlera. \\  
-  \textbf{kompilacije} & Nakon IR, asemblerski kod, & Objektni fajl direktno iz IR \\  
-  {} & pa iz njega objektni fajl & objektni fajl direktno iz IR \\  
-  \midrule
+  \hline
+  \textbf{Generisani} & Efikasan, & Efikasan, zbog korišćenja SSA forme\\
+  \textbf{kod} & veliki broj opcija & na LLVM backend-u \\
+  \hline
+  {} & Sporiji zbog oslanjanja na nezavisne & Brži zbog integrisanja sopstvenih \\  
+  \textbf{Brzina} &  kompajlere.  &  kompajlera. \\  
+  \textbf{kompilacije} & Nakon IR, asemblerski kod, pa iz njega & Objektni fajl direktno iz IR\\  
+  {} &  objektni fajl &  \\  
+  \hline
   \textbf{Brzina izvršavanja} &   \multicolumn{2}{|c|}{GCC u proseku brži 1-4\%  za većinu} \\
   \textbf{dobijenog koda}     &   \multicolumn{2}{|c|}{programa na 02 i 03 nivou}  \\  
-  \bottomrule
-  \end{tabular}
+  \hline
+\end{tabular}
+\vspace{2em}
 
-  \vspace{2em}
-  
+
 
 % Koje su razlike između optimizacija GCC/LLVM i kompajlera Native Image
 \section{Native-Image kompajler}
