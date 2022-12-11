@@ -153,7 +153,7 @@ Neke globalne optimizacije date su u nastavku.
 
 \subsubsection{Međuproceduralne optimizacije}
 \label{subsubsec:međuproceduralne} 
-Međuproceduralna optimizacija radi na celokupnom grafu kontorle toka (eng. ~ {\em Control Flow Graph, CFG}) \footnote{Graf kontorle toka (eng. ~ {\em Control Flow Graph, CFG}) je graf koji sadrži osnovne blokove funkcije.} koji prati pozive funkcija i njihovu međusobnu interakciju. \cite{kkMVJ}
+Međuproceduralna optimizacija radi na celokupnom grafu kontrole toka (eng. ~ {\em Control Flow Graph, CFG}) \footnote{Graf kontrole toka (eng. ~ {\em Control Flow Graph, CFG}) je graf koji sadrži osnovne blokove funkcije.} koji prati pozive funkcija i njihovu međusobnu interakciju. \cite{kkMVJ}
 Ova optimizacija se vrši na nivou celog programa tj. više funkcija. U okviru ove optimizacije jedna od najznačajnijih tehnika je \textbf{uvlačenje definicija funkcija (eng. ~{\em Inlining})}. 
 Uglavnom se jednostavnije funkcije uvlače, a složenije ne. 
 Premalo uvlačenja dovodi do troškova vezanih za pozive funkcija, a previše uveća veličinu koda i dovodi do neefikasnosti, pa treba uspostaviti ravnotežu. \cite{kkFM}
@@ -229,7 +229,7 @@ int main (void)
 }
 \end{lstlisting}
 
-Glavni program sadrži petlju koja poziva funkciju powern, koja računa n-ti stepen broja. Vreme izvršavanja programa se može meriti naredbom time. Sa slike \ref{fig:Rezultati_optimizacije} se jasno vidi da se brzina izvršavanja programa povećava, kako se povećava nivo optimizacije.
+Glavni program sadrži petlju koja poziva funkciju powern, koja računa n-ti stepen broja. Vreme izvršavanja programa se može meriti naredbom time. Sa slike \ref{fig:Rezultati_optimizacije} se jasno vidi da se vreme izvršavanja programa smanjuje, kako se povećava nivo optimizacije.
 
 \begin{figure}[h!]
     \begin{center}
@@ -259,7 +259,7 @@ Postoji sedam -O nivoa optimizacije:
 \item \textbf{Oz nivo optimizacije:} Dozvoljene sve optimizacije kao i na nivou -Os, a samim tim i -O2,  sa dodatnim smanjenjem veličine koda. \cite{opt} \cite{pass} \cite{pass2}
 \end{itemize}
 
-Program \ref{fig:simple} se može iskoristi i za demonstraciju efekta različitih nivoa optimizacije kod LLVM kompajlera. Sa slike \ref{fig:Rezultati_optimizacije2} se jasno vidi da se brzina izvršavanja programa smanjuje, kako se povećava nivo optimizacije.
+Program \ref{fig:simple} se može iskoristi i za demonstraciju efekta različitih nivoa optimizacije kod LLVM kompajlera. Sa slike \ref{fig:Rezultati_optimizacije2} se jasno vidi da se vreme izvršavanja programa smanjuje, kako se povećava nivo optimizacije.
 
 \begin{figure}[h!]
     \begin{center}

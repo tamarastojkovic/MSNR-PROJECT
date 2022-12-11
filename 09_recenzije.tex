@@ -71,7 +71,7 @@ Pohvala za pažnju koja je usmerena ka uvodnom delu rada, gde su detaljno opisan
           Takođe, u sekciji koja govori u optimizaciji koda (strana 4, sekcija 2.2) za optimizaciju redosleda instrukcija dodat je deo teksta, kako bi se bolje razumele faze. 
 }
 
-Glavni deo seminarskog u kome je razradjena sama tema je super odradjen. Sažet i detaljan opis GCC kompajlera je prikladan. Bilo bi super da su i za LLVM prikazane slike performansi kao i za GCC(\textsc{Strana 6} u seminarskom radu). Testovi koji su obavljeni nad oba kompajlera su mogli biti dopunjeni nekim grafikonom, kako bi se dobio i vizuelni utisak o celoj priči.
+Glavni deo seminarskog u kome je razradjena sama tema je super odradjen. Sažet i detaljan opis GCC kompajlera je prikladan. Bilo bi super da su i za LLVM prikazane slike performansi kao i za GCC(\textsc{Strana 6} u seminarskom radu). \odgovor{Na strani 8 je dodata slika koja prikazuje dužinu izvršavanja programa sa raličitim nivoima optimizacije u okviru LLVM kompajlera.} \\ Testovi koji su obavljeni nad oba kompajlera su mogli biti dopunjeni nekim grafikonom, kako bi se dobio i vizuelni utisak o celoj priči.
 
 Poslednji deo teme koji se tiče Native Image-a bi trebalo još malo razraditi, kako bi se dobilo bolje poredjenje sa prethodna dva kompajlera. 
 
@@ -83,8 +83,10 @@ Preporuka za dodavanje dela priče o llvm-gcc komandi kao spoj izmedju LLVM-a i 
 Gramatickih gresaka skoro da nema, i stil pisanja je i vise nego zadovoljavajuc.
 
 \begin{itemize}
-    \item Na strani 5, gde se govori o nivoima optimizacije, ponavlja se sličan koncept rečenica za svaku stavku. Možda je bilo bolje postaviti nivoe u tabelu i štiklirati osobine koje važe za koji nivo, da bi se izbeglo ponavljanje fraza \textit{"Na ovom nivou","Ovaj nivo"}.
-    \item Strana 6, prva slika ne sadrži nikakav \textit{caption}.
+    \item Na strani 5, gde se govori o nivoima optimizacije, ponavlja se sličan koncept rečenica za svaku stavku. Možda je bilo bolje postaviti nivoe u tabelu i štiklirati osobine koje važe za koji nivo, da bi se izbeglo ponavljanje fraza \textit{"Na ovom nivou","Ovaj nivo"}. \\
+          \odgovor{Napravljene su izmene u tekstu na strani 5 kako bi se izbeglo ponavljanje fraza \textit{"Na ovom nivou","Ovaj nivo"}. Tabela možda ne bi mogla da prikaže sve informacije o nivoima.}
+    \item Strana 6, prva slika ne sadrži nikakav \textit{caption}. \\
+         \odgovor{Dodat \textit{caption} „Program za izračunavanje n-tog stepena brojeva“ na strani broj 6.}
     \item Strana 10, štur opis slike, potreban kratak opis.
     \item Par gramatičkih grešaka, gde su u pitanju š,č itd. \\
          \odgovor{Ukazane greške su ispravljene dodavanjem odgovarajućih slova.}
@@ -173,7 +175,8 @@ Zaključak ovog rada je lepo sažet i još jednom naglašava bitnost optimizacij
 
 \section{Krupne primedbe i sugestije}
 % Напишете своја запажања и конструктивне идеје шта у раду недостаје и шта би требало да се промени-измени-дода-одузме да би рад био квалитетнији.
-Pohvale za prikazivanje optimizacionih performansi u okviru kompajlera GCC direktno na primeru, gde se na osnovu nivoa optimizacije pri kompajliranju programa prikazuje dužina izvršavanja izvršivog fajla. Jedino što mi nije jasno je komentar da se brzina izvršavanja povećava sa povećanjem optimizacionog nivoa, dok se na screenshot-u terminala može videti kako se vreme izvršavanja koda smanjuje uz povećanje optimizacionog nivoa, ali pretpostavljam da je to lapsus. Drugih primedbi i sugestija nemam.
+Pohvale za prikazivanje optimizacionih performansi u okviru kompajlera GCC direktno na primeru, gde se na osnovu nivoa optimizacije pri kompajliranju programa prikazuje dužina izvršavanja izvršivog fajla. Jedino što mi nije jasno je komentar da se brzina izvršavanja povećava sa povećanjem optimizacionog nivoa, dok se na screenshot-u terminala može videti kako se vreme izvršavanja koda smanjuje uz povećanje optimizacionog nivoa, ali pretpostavljam da je to lapsus. \odgovor{Komentar, na strani 6, da se brzina izvršavanja povećava sa povećanjem optimizacionog nivoa je zamenjen komentarom da se vreme izvršavanja programa smanjuje, kako se povećava nivo optimizacije. } \\
+Drugih primedbi i sugestija nemam.
 
 \section{Sitne primedbe}
 % Напишете своја запажања на тему штампарских-стилских-језичких грешки
