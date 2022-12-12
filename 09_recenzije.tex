@@ -19,29 +19,16 @@
 
 \begin{document}
 
-\title{Dopunite naslov svoga rada\\ \small{Dopunite autore rada}}
+\title{Optimizacije kroz GCC, LLVM i Native Image}
+\author{Tamara Stojković, Emilija Stošić, Teodora Isailović \and tamara.stojkovic.1998@gmail.com, emilijazstosic@gmail.com, \and teodora.isailovic@gmail.com}
+
 
 \maketitle
 
 \tableofcontents
 
-\chapter{Uputstva}
-\emph{Prilikom predavanja odgovora na recenziju, obrišite ovo poglavlje.}
 
-Neophodno je odgovoriti na sve zamerke koje su navedene u okviru recenzija. Svaki odgovor pišete u okviru okruženja \verb"\odgovor", \odgovor{kako bi vaši odgovori bili lakše uočljivi.} 
-\begin{enumerate}
-
-\item Odgovor treba da sadrži na koji način ste izmenili rad da bi adresirali problem koji je recenzent naveo. Na primer, to može biti neka dodata rečenica ili dodat pasus. Ukoliko je u pitanju kraći tekst onda ga možete navesti direktno u ovom dokumentu, ukoliko je u pitanju duži tekst, onda navedete samo na kojoj strani i gde tačno se taj novi tekst nalazi. Ukoliko je izmenjeno ime nekog poglavlja, navedite na koji način je izmenjeno, i slično, u zavisnosti od izmena koje ste napravili. 
-
-\item Ukoliko ništa niste izmenili povodom neke zamerke, detaljno obrazložite zašto zahtev recenzenta nije uvažen.
-
-\item Ukoliko ste napravili i neke izmene koje recenzenti nisu tražili, njih navedite u poslednjem poglavlju tj u poglavlju Dodatne izmene.
-\end{enumerate}
-
-Za svakog recenzenta dodajte ocenu od 1 do 5 koja označava koliko vam je recenzija bila korisna, odnosno koliko vam je pomogla da unapredite rad. Ocena 1 označava da vam recenzija nije bila korisna, ocena 5 označava da vam je recenzija bila veoma korisna. 
-
-NAPOMENA: Recenzije ce biti ocenjene nezavisno od vaših ocena. Na osnovu recenzije ja znam da li je ona korisna ili ne, pa na taj način vama idu negativni poeni ukoliko kažete da je korisno nešto što nije korisno. Vašim kolegama šteti da kažete da im je recenzija korisna jer će misliti da su je dobro uradili, iako to zapravo nisu. Isto važi i na drugu stranu, tj nemojte reći da nije korisno ono što jeste korisno. Prema tome, trudite se da budete objektivni. 
-\chapter{Recenzent \odgovor{--- ocena:} }
+\chapter{Recenzent \odgovor{--- ocena: 5} }
 
 
 \section{O čemu rad govori?}
@@ -68,10 +55,11 @@ Pohvala za pažnju koja je usmerena ka uvodnom delu rada, gde su detaljno opisan
           Kod međuproceduralnih optimizacija ( strana 4, sekcija 2.1.3) dodat je sledeći deo 
           „Međuproceduralna optimizacija radi na celokupnom grafu kontrole toka (eng. ~ {\em Control Flow Graph, CFG}) koji prati pozive funkcija i njihovu međusobnu interakciju. 
           Ova optimizacija se vrši na nivou celog programa tj. više funkcija. “ 
-          Takođe, u sekciji koja govori u optimizaciji koda (strana 4, sekcija 2.2) za optimizaciju redosleda instrukcija dodat je deo teksta, kako bi se bolje razumele faze. 
+          Takođe, u sekciji koja govori o optimizaciji koda (strana 4, sekcija 2.2) za optimizaciju redosleda instrukcija dodat je deo teksta, kako bi se bolje razumele faze. 
 }
 
-Glavni deo seminarskog u kome je razradjena sama tema je super odradjen. Sažet i detaljan opis GCC kompajlera je prikladan. Bilo bi super da su i za LLVM prikazane slike performansi kao i za GCC(\textsc{Strana 6} u seminarskom radu). \odgovor{Na strani 8 je dodata slika koja prikazuje dužinu izvršavanja programa sa raličitim nivoima optimizacije u okviru LLVM kompajlera.} \\ Testovi koji su obavljeni nad oba kompajlera su mogli biti dopunjeni nekim grafikonom, kako bi se dobio i vizuelni utisak o celoj priči.
+Glavni deo seminarskog u kome je razradjena sama tema je super odradjen. Sažet i detaljan opis GCC kompajlera je prikladan. Bilo bi super da su i za LLVM prikazane slike performansi kao i za GCC(\textsc{Strana 6} u seminarskom radu). \\
+\odgovor{Na strani 8 je dodata slika koja prikazuje dužinu izvršavanja programa sa raličitim nivoima optimizacije u okviru LLVM kompajlera.} \\ Testovi koji su obavljeni nad oba kompajlera su mogli biti dopunjeni nekim grafikonom, kako bi se dobio i vizuelni utisak o celoj priči.
 
 Poslednji deo teme koji se tiče Native Image-a bi trebalo još malo razraditi, kako bi se dobilo bolje poredjenje sa prethodna dva kompajlera. 
 
@@ -158,7 +146,7 @@ Slike i tabele su funkcionalne, potrebno je malo ih bolje opisati.
 Srednje sam upućena u ovu temu, uz dodatak da sam je i sama istraživala radi svojih ličnih potreba. O oblastima GCC-a sam učila tokom studiranja na osnovnim studijama, a o kompajleru Native-Image sam učila tokom pisanja seminarskog rada "Optimizacije dostupne u okviru kompajlera
 Native Image" u sklopu ovog kursa, gde sam zajedno sa timom izučila njegove specifičnosti.
 
-\chapter{Recenzent \odgovor{--- ocena:} }
+\chapter{Recenzent \odgovor{--- ocena: 5} }
 
 
 \section{O čemu rad govori?}

@@ -57,7 +57,7 @@
 
 \begin{document}
 
-\title{Optimizacije - ključ dobrih performansi\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
+\title{Optimizacije kroz GCC, LLVM i Native Image\\ \small{Seminarski rad u okviru kursa\\Metodologija stručnog i naučnog rada\\ Matematički fakultet}}
 \author{Tamara Stojković, Emilija Stošić, Teodora Isailović \and tamara.stojkovic.1998@gmail.com, emilijazstosic@gmail.com, \and teodora.isailovic@gmail.com}
 \date{12.~novembar 2022.}
 
@@ -347,8 +347,8 @@ Optimizacije koje se vrše na nivoima -O0 i -O1 su identične. Kod GCC kompajler
     \hline
   \textbf{Modularnost koda} & Monolitičan & Modularan \\
   \hline
-  \textbf{Generisani} & Efikasan, & Efikasan, zbog korišćenja SSA forme\\
-  \textbf{kod} & veliki broj opcija & na LLVM backend-u \\
+  \textbf{Generisani kod} & Efikasan, veliki broj opcija & Efikasan, zbog korišćenja SSA forme \\
+  {}  &  & na LLVM backend-u \\
   \hline
   {} & Sporiji zbog oslanjanja na nezavisne & Brži zbog integrisanja sopstvenih \\  
   \textbf{Brzina} &  kompajlere.  &  kompajlera. \\  
@@ -356,7 +356,7 @@ Optimizacije koje se vrše na nivoima -O0 i -O1 su identične. Kod GCC kompajler
   {} &  objektni fajl &  \\  
   \hline
   \textbf{Brzina izvršavanja} &   \multicolumn{2}{|c|}{GCC u proseku brži 1-4\%  za većinu} \\
-  \textbf{dobijenog koda}     &   \multicolumn{2}{|c|}{programa na 02 i 03 nivou}  \\  
+  \textbf{dobijenog koda}     &   \multicolumn{2}{|c|}{programa na -02 i -03 nivou}  \\  
   \hline
 \end{tabular}
 \vspace{2em}
