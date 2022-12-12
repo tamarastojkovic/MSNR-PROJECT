@@ -61,7 +61,10 @@ Pohvala za pažnju koja je usmerena ka uvodnom delu rada, gde su detaljno opisan
 Glavni deo seminarskog u kome je razradjena sama tema je super odradjen. Sažet i detaljan opis GCC kompajlera je prikladan. Bilo bi super da su i za LLVM prikazane slike performansi kao i za GCC(\textsc{Strana 6} u seminarskom radu). \\
 \odgovor{Na strani 8 je dodata slika koja prikazuje dužinu izvršavanja programa sa raličitim nivoima optimizacije u okviru LLVM kompajlera.} \\ Testovi koji su obavljeni nad oba kompajlera su mogli biti dopunjeni nekim grafikonom, kako bi se dobio i vizuelni utisak o celoj priči. \\ \odgovor{Rezultati testova koji su obavljeni nad kompajlerima su detaljno objašnjeni i mogu se videti i na slikama, pa zbog toga nije dodat grafički prikaz rezultata testova, takođe, dodavanjem grafika, rad ne bi ispoštovao zadatu strukturu.}
 
-Poslednji deo teme koji se tiče Native Image-a bi trebalo još malo razraditi, kako bi se dobilo bolje poredjenje sa prethodna dva kompajlera. 
+Poslednji deo teme koji se tiče Native Image-a bi trebalo još malo razraditi, kako bi se dobilo bolje poredjenje sa prethodna dva kompajlera. \\
+\odgovor{Dodata je rečenica koja govori osnovno poboljšanje koje donosi Native Image. U pitanju je sledeća rečenica:
+ Rezultujući kod se brže izvršava i zauzima manje memorije u odnosu na JVM. \\
+Native Image je vrlo opširna tema, ali zbog ograničenja u dužini rada je ovde dat samo kratak prikaz njegove upotrebe. }
 
 Preporuka za dodavanje dela priče o llvm-gcc komandi kao spoj izmedju LLVM-a i GCC-a. \\
 \odgovor{Na strani 8 je dodat tekst o llvm-gcc komandi. Komanda \textbf{llvm-gcc} je modifikovana verzija komande gcc, koja kompajlira C/Objective-C programe u izvorne objekte, LLVM bajtkodove ili LLVM asemblerske kodove, u zavisnosti od opcija. Podrazumevano, llvm-gcc kompajlira programe u izvorne objekte baš kao što to radi GCC. Ako su date opcije -emit-llvm i -c, onda će se umesto toga generisati LLVM bajtkod datoteke. Ako su date opcije -emit-llvm i -S, onda će se generisati LLVM asemblerski kod. Opcija -emit-llvm se uvek navodi sa opcijama -c ili -S, inače nema nikakvog efekta. Komanda \textbf{llvm-gcc} ima mnoge karakteristike komande gcc i prihvata većinu gcc-ovih opcija.}
