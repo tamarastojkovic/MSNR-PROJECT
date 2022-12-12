@@ -54,16 +54,17 @@ Pohvala za pažnju koja je usmerena ka uvodnom delu rada, gde su detaljno opisan
           Iz tog razloga fokus nije na previše detalja u prvoj sekciji rada i smatramo da nije neophodno previše je proširivati. Dodat je deo teksta, zarad boljeg razumevanja.
           Kod međuproceduralnih optimizacija ( strana 4, sekcija 2.1.3) dodat je sledeći deo 
           „Međuproceduralna optimizacija radi na celokupnom grafu kontrole toka (eng. ~ {\em Control Flow Graph, CFG}) koji prati pozive funkcija i njihovu međusobnu interakciju. 
-          Ova optimizacija se vrši na nivou celog programa tj. više funkcija. “ 
+          Ova optimizacija se vrši na nivou celog programa tj. više funkcija. “.
           Takođe, u sekciji koja govori o optimizaciji koda (strana 4, sekcija 2.2) za optimizaciju redosleda instrukcija dodat je deo teksta, kako bi se bolje razumele faze. 
 }
 
 Glavni deo seminarskog u kome je razradjena sama tema je super odradjen. Sažet i detaljan opis GCC kompajlera je prikladan. Bilo bi super da su i za LLVM prikazane slike performansi kao i za GCC(\textsc{Strana 6} u seminarskom radu). \\
-\odgovor{Na strani 8 je dodata slika koja prikazuje dužinu izvršavanja programa sa raličitim nivoima optimizacije u okviru LLVM kompajlera.} \\ Testovi koji su obavljeni nad oba kompajlera su mogli biti dopunjeni nekim grafikonom, kako bi se dobio i vizuelni utisak o celoj priči.
+\odgovor{Na strani 8 je dodata slika koja prikazuje dužinu izvršavanja programa sa raličitim nivoima optimizacije u okviru LLVM kompajlera.} \\ Testovi koji su obavljeni nad oba kompajlera su mogli biti dopunjeni nekim grafikonom, kako bi se dobio i vizuelni utisak o celoj priči. \\ \odgovor{Rezultati testova koji su obavlejni nad kompajlerima su detaljno objašnjeni i mogu se videti i na slikama, pa zbog toga nije dodat grafički prikaz rezultata testova, takođe, dodavanjem grafika, rad ne bi ispoštovao zadatu strukturu.}
 
 Poslednji deo teme koji se tiče Native Image-a bi trebalo još malo razraditi, kako bi se dobilo bolje poredjenje sa prethodna dva kompajlera. 
 
-Preporuka za dodavanje dela priče o llvm-gcc komandi kao spoj izmedju LLVM-a i GCC-a.
+Preporuka za dodavanje dela priče o llvm-gcc komandi kao spoj izmedju LLVM-a i GCC-a. \\
+\odgovor{Na strani 8 je dodat tekst o llvm-gcc komandi. Komanda \textbf{llvm-gcc} je modifikovana verzija komande gcc, koja kompajlira C/Objective-C programe u izvorne objekte, LLVM bajtkodove ili LLVM asemblerske kodove, u zavisnosti od opcija. Podrazumevano, llvm-gcc kompajlira programe u izvorne objekte baš kao što to radi GCC. Ako su date opcije -emit-llvm i -c, onda će se umesto toga generisati LLVM bajtkod datoteke. Ako su date opcije -emit-llvm i -S, onda će se generisati LLVM asemblerski kod. Opcija -emit-llvm se uvek navodi sa opcijama -c ili -S, inače nema nikakvog efekta. Komanda \textbf{llvm-gcc} ima mnoge karakteristike komande gcc i prihvata većinu gcc-ovih opcija.}
 
 
 \section{Sitne primedbe}
@@ -76,10 +77,10 @@ Gramatickih gresaka skoro da nema, i stil pisanja je i vise nego zadovoljavajuc.
     \item Strana 6, prva slika ne sadrži nikakav \textit{caption}. \\
          \odgovor{Dodat \textit{caption} „Program za izračunavanje n-tog stepena brojeva“ na strani broj 6.}
     \item Strana 10, štur opis slike, potreban kratak opis. \\
-          \odgovor{ Zamenjen je opis slike opsiom situacije prikazane na slici. } 
+          \odgovor{ Zamenjen je opis slike opisom situacije prikazane na slici. } 
     \item Par gramatičkih grešaka, gde su u pitanju š,č itd. \\
          \odgovor{Ukazane greške su ispravljene dodavanjem odgovarajućih slova.}
-    \item Korišćeno je dosta stranih izraza, za neke bi trebalo dodati fusnote kao dodatno objasnjenje.
+    \item Korišćeno je dosta stranih izraza, za neke bi trebalo dodati fusnote kao dodatno objasnjenje. \\
           \odgovor{Većina stranih izraza korišćena je da predstavi kako odgovarajući pojam glasi na engleskom, za koji je dat prevod na srpski jezik i objašnjeni su.
                    Dodata je fusnota koja objašnjava šta predstavlja graf kontrole toka kao novo uvedeni pojam.
                    Dodata fusnota: „Graf kontrole toka (eng. ~ {\em Control Flow Graph, CFG}) je graf koji sadrži osnovne blokove funkcije.“
@@ -106,7 +107,8 @@ Nije propušteno ništa važno. U tekstu iznad su date kritike, koji delovi bi s
 Suštinske greške nisu primećene. Rad je opisan adekvatno, uz neke manje nedostatke.
 
 \item Da li je naslov rada dobro izabran?\\
-Naslov rada nije dobro postavljen i ne odgovara temi. Tema rada su većinski navedena tri kompajlera, prema tome su oni trebali stajati u naslovu.
+Naslov rada nije dobro postavljen i ne odgovara temi. Tema rada su većinski navedena tri kompajlera, prema tome su oni trebali stajati u naslovu. \\
+\odgovor{Naslov rada je promenjen. Novi naslov rada je „Optimizacije kroz GCC, LLVM i Native Image“.}
 
 \item Da li sažetak sadrži prave podatke o radu?\\
 Sažetak je jasno napisan i odgovara temi.
@@ -165,7 +167,7 @@ Zaključak ovog rada je lepo sažet i još jednom naglašava bitnost optimizacij
 
 \section{Krupne primedbe i sugestije}
 % Напишете своја запажања и конструктивне идеје шта у раду недостаје и шта би требало да се промени-измени-дода-одузме да би рад био квалитетнији.
-Pohvale za prikazivanje optimizacionih performansi u okviru kompajlera GCC direktno na primeru, gde se na osnovu nivoa optimizacije pri kompajliranju programa prikazuje dužina izvršavanja izvršivog fajla. Jedino što mi nije jasno je komentar da se brzina izvršavanja povećava sa povećanjem optimizacionog nivoa, dok se na screenshot-u terminala može videti kako se vreme izvršavanja koda smanjuje uz povećanje optimizacionog nivoa, ali pretpostavljam da je to lapsus. \odgovor{Komentar, na strani 6, da se brzina izvršavanja povećava sa povećanjem optimizacionog nivoa je zamenjen komentarom da se vreme izvršavanja programa smanjuje, kako se povećava nivo optimizacije. } \\
+Pohvale za prikazivanje optimizacionih performansi u okviru kompajlera GCC direktno na primeru, gde se na osnovu nivoa optimizacije pri kompajliranju programa prikazuje dužina izvršavanja izvršivog fajla. Jedino što mi nije jasno je komentar da se brzina izvršavanja povećava sa povećanjem optimizacionog nivoa, dok se na screenshot-u terminala može videti kako se vreme izvršavanja koda smanjuje uz povećanje optimizacionog nivoa, ali pretpostavljam da je to lapsus. \\ \odgovor{Komentar, na strani 6, da se brzina izvršavanja povećava sa povećanjem optimizacionog nivoa je zamenjen komentarom da se vreme izvršavanja programa smanjuje, kako se povećava nivo optimizacije. } \\
 Drugih primedbi i sugestija nemam.
 
 \section{Sitne primedbe}
@@ -202,7 +204,8 @@ Ja nisam uočio ništa važno što je propušteno i što bi moglo doprineti bolj
 Suštinske greške i propuste nisam primetio, sem ovog koji je opisan u odeljku primedbi i sugestija.
 
 \item Da li je naslov rada dobro izabran?\\
-Naslov rada koji mi je prosleđen na mejl za recenziju se ne podudara sa naslovom rada, ono što bih ja dodao u naslov jesu nazivi kompajlera na kojima je bio akcenat tokom pisanja, a to su GCC, LLVM i Native Image.
+Naslov rada koji mi je prosleđen na mejl za recenziju se ne podudara sa naslovom rada, ono što bih ja dodao u naslov jesu nazivi kompajlera na kojima je bio akcenat tokom pisanja, a to su GCC, LLVM i Native Image. \\
+\odgovor{Naslov rada je promenjen. Novi naslov rada je „Optimizacije kroz GCC, LLVM i Native Image“.}
 
 \item Da li sažetak sadrži prave podatke o radu?\\
 Sažetak jasno opisuje teme koje su obrađene u radu.

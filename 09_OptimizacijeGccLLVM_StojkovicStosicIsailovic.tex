@@ -275,6 +275,7 @@ Program \ref{fig:simple} se može iskoristi i za demonstraciju efekta različiti
 
 \newpage
 
+Komanda \textbf{llvm-gcc} je modifikovana verzija komande gcc, koja kompajlira C/Objective-C programe u izvorne objekte, LLVM bajtkodove ili LLVM asemblerske kodove, u zavisnosti od opcija. Podrazumevano, llvm-gcc kompajlira programe u izvorne objekte baš kao što to radi GCC. Ako su date opcije -emit-llvm i -c, onda će se umesto toga generisati LLVM bajtkod datoteke. Ako su date opcije -emit-llvm i -S, onda će se generisati LLVM asemblerski kod. Opcija -emit-llvm se uvek navodi sa opcijama -c ili -S, inače nema nikakvog efekta. Komanda \textbf{llvm-gcc} ima mnoge karakteristike komande gcc i prihvata većinu gcc-ovih opcija.\cite{llvm-gcc}
 
 \section{Različite optimizacije u okviru kompajlera GCC/LLVM}
 \label{subsec:razlike}
