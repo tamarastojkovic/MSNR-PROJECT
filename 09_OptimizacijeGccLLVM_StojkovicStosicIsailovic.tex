@@ -82,7 +82,7 @@ Kompajleri obično obezbeđuju ograničen broj  standardnih optimizacionih nivoa
 Postoje razne tehnike u primeni procesa optimizacije. Razlikujemo optimizacije koje se primenjuju na međukod,  kao deo generisanja ciljnog koda, ali i nakon generisanja ciljnog koda.
 \textbf{Optimizacija međukoda} primenjuje se da se kod pojednostavi, preuredi ili sažme. Predstavlja optimizaciju koja ne uzima u obzir specifičnost ciljne arhitekture.
 Neke od stavki koje \textbf{optimizacija kao deo generisanja ciljnog koda} omogućava su biranje instrukcija i određivanje načina alociranja objekata. Na kraju, može se izvršiti i \textbf{optimizacija ciljnog koda}, gde se pokušava prerada samog asemblerskog koda u nešto efikasnije. 
-U ovom slučaju zahteva se deta\-ljno poznavanje ciljne arhitekture, kao i asemblerskog i mašinskog jezika ciljnog programa. \cite{osnovnaPodela}
+U ovom slučaju zahteva se deta\-ljno poznavanje ciljne arhitekture, kao i asemblerskog i mašinskog jezika ciljnog programa. \cite{osnovnaPodela}\cite{dragonbook}
 
 
 \subsection{Optimizacije međukoda}
@@ -275,7 +275,7 @@ Program \ref{fig:simple} se može iskoristi i za demonstraciju efekta različiti
 
 \newpage
 
-Komanda \textbf{llvm-gcc} je modifikovana verzija komande gcc, koja kompajlira C/Objective-C programe u izvorne objekte, LLVM bajtkodove ili LLVM asemblerske kodove, u zavisnosti od opcija. Podrazumevano, llvm-gcc kompajlira programe u izvorne objekte baš kao što to radi GCC. Ako su date opcije -emit-llvm i -c, onda će se umesto toga generisati LLVM bajtkod datoteke. Ako su date opcije -emit-llvm i -S, onda će se generisati LLVM asemblerski kod. Opcija -emit-llvm se uvek navodi sa opcijama -c ili -S, inače nema nikakvog efekta. Komanda \textbf{llvm-gcc} ima mnoge karakteristike komande gcc i prihvata većinu gcc-ovih opcija.\cite{llvm-gcc}
+Komanda \textbf{llvm-gcc} je modifikovana verzija komande gcc, koja ko\-mpajlira C/Objective-C programe u izvorne objekte, LLVM bajtkodove ili LLVM asemblerske kodove, u zavisnosti od opcija. Podrazumevano, llvm-gcc kompajlira programe u izvorne objekte baš kao što to radi GCC. Ako su date opcije -emit-llvm i -c, onda će se umesto toga generisati LLVM bajtkod datoteke. Ako su date opcije -emit-llvm i -S, onda će se generisati LLVM asemblerski kod. Opcija -emit-llvm se uvek navodi sa opcijama -c ili -S, inače nema nikakvog efekta. Komanda \textbf{llvm-gcc} ima mnoge kara\-kteristike komande gcc i prihvata većinu gcc-ovih opcija.\cite{llvm-gcc}
 
 \section{Različite optimizacije u okviru kompajlera GCC/LLVM}
 \label{subsec:razlike}
