@@ -128,22 +128,50 @@
         \end{itemize}
 \end{frame}
 
-
-
-
-
-
-
-%samo je testirano dodavanje slika -ubacite koju hocete i kako hocete i koliko po slajdu
-%\section{dodati naziv}
-\begin{frame}{GCC optimizacija} %promeniti sve
-    \begin{figure}[h!]
+\section{Napredne optimizacije u okviru kompajlera GCC/LLVM}
+\subsection{Optimizacije u okviru kompajlera GCC}
+\begin{frame}{Optimizacije u okviru kompajlera GCC}
+    \begin{itemize}
+        \item GCC ima veliki broj opcija kojima se mogu podesiti parametri prevođenja
+        \item Nivo optimizacije koju kompajler vrši se kontroliše
+opcijom -On, gde je n nivo zahtevane optimizacije
+        \item Postoji osam nivoa optimizacije : -O0, -O1, -O2, -O3, -Os, -Oz, -Og, -Ofast
+    \end{itemize}
+     \begin{figure}[h!]
         \begin{center}
-       \includegraphics[scale = 0.2]{../pics/test.png}
+       \includegraphics[scale = 0.3]{../pics/test.png}
        \end{center}
        \caption{Rezultati optimizacije kod GCC kompajlera}
-    \end{figure} 
+    \end{figure}    
 \end{frame}
+
+\subsection{Optimizacije u okviru kompajlera LLVM}
+\begin{frame}{Optimizacije u okviru kompajlera LLVM}
+    \begin{itemize}
+        \item Optimizacije u vidu prolaza
+        \item Svi LLVM prolazi su podklase klase Pass
+        \item Funkcionalnosti su implementirane tako što prevazilaze virtuelne metode nasleđene od klase Pass
+        \item Analysis Passes prikuplja informacija koje 
+služe za otklanjanje grešaka ili vizuelizaciju programa
+        \item Transform Passes se koriste za optimizaciju koda
+        \item Utility Passes služe za dobijanje raznih
+informacija, koje su bitne za razvoj drugih prolaza
+    \end{itemize}    
+\end{frame}
+
+
+\begin{frame}{Optimizacije u okviru kompajlera LLVM}
+    \begin{itemize}
+        \item Postoji sedam nivoa optimizacije : -O0, -O1, -O2, -O3, -O4, -Os, -Oz
+        \begin{figure}[h!]
+        \begin{center}
+          \includegraphics[scale = 0.25]{../pics/test2.png}
+        \end{center}
+       \caption{Rezultati optimizacije kod LLVM kompajlera}
+    \end{figure} 
+    \end{itemize}    
+\end{frame}
+
 
 
 \end{document}
