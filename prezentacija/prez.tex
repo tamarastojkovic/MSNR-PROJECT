@@ -3,7 +3,7 @@
 
 %tema
 \usetheme{Antibes}
-\usecolortheme[named=Maroon]{structure}
+%\usecolortheme[named=Maroon]{structure}
 \usecolortheme{beaver}
 \setbeamercolor{titlelike}{fg=black, bg=purple}
 \setbeamercolor{palette primary}{fg=pink, bg=purple}
@@ -172,7 +172,75 @@ informacija, koje su bitne za razvoj drugih prolaza
     \end{itemize}    
 \end{frame}
 
+%\section{Native Image}
+%\begin{frame}{Native Image}
+%\vspace{\baselineskip}
+%\begin{itemize}
+%	\item Ahead-Of-Time kompilacija
+%    \item Od bytecode-a do izvršivog koda (native image) određene platforme
+%    \item Rezultat je statički povezan kod koji se izvršava direktno na procesoru 
+%    \item Podržava jezike kao što su Java, Scala, Kotlin itd.
+%	\item Najpoznatiji primeri Native Image iz GraalVM i Ngen za .NET Framework-a
+%\end{itemize}
+%\end{frame}
+%
+%\subsection{Problemi i optimizacije}
+%\begin{frame}{Problemi i optimizacije - Native Image}
+%    \begin{itemize}
+%        \item Statička analiza (Closed World Assumption)
+%        \item Za nerazrešene delove potreban konfiguracioni fajl \\ (tracing agent)
+%        \item Rezultujući kod se izvršava brže i zahteva manje memorije u odnosu na JVM
+%        \item 
+%    \end{itemize}
+%        
+%\end{frame}
 
+\section{Native Image}
+\subsection{Pojam}
+\begin{frame}{Native Image - pojam}
+    \begin{itemize}
+        \item Od bytecode-a do izvršivog koda (native image) određene platforme
+        \item Ahead-Of-Time kompilacija
+        \item Rezultujući kod se izvršava brže i zahteva manje memorije u odnosu na VM
+        \item Najpoznatiji primeri Native Image iz GraalVM i Ngen (CrossGen) za .NET Framework (Core)            
+    \end{itemize} 
+    \vspace{1em}
+    \begin{figure}[h!]
+        \begin{center}
+            \includegraphics[scale = 0.25]{../pics/alibaba_pic.jpg}
+        \end{center}
+        \caption{Ubrzanje native image-a u odnosu na JVM}
+    \end{figure} 
+\end{frame}
+
+\subsection{Prevodjenje}
+\begin{frame}{Prevodjenje}
+    \begin{itemize}
+        \item Statička analiza (Closed World Assumption)
+        \vspace{1em}
+        \item Problemi i optimizacije:
+        \begin{itemize}
+            \item Reflection API
+            \item Dynamic proxy
+            \item Java Native Interface
+        \end{itemize}        
+        \vspace{1em}
+        \item Za nerazrešene delove potreban konfiguracioni fajl \\ (tracing agent)
+        \item Fallback image
+    \end{itemize}
+\end{frame}
+
+\section{Literatura}
+\begin{frame}{Literatura}
+    \begin{itemize}
+        % \item Compiler Design - Code Optimization
+        \item Kompajleri Stanford \\ \scriptsize \url{https://web.stanford.edu/class/archive/cs/cs143/cs143.1128/}  \normalsize
+        \item The Dragon Book Compilers: Principles, Techniques (Alfred V. Aho, Monica S. Lam, Ravi Sethi, and Jeffrey D. Ullman) \normalsize
+        \item Options That Control Optimization \\ \scriptsize \url{https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html} \normalsize
+        \item LLVM's Analysis and Transform Passes \\ \scriptsize \url{https://llvm.org/docs/Passes.html} \normalsize
+        \item GraalVM Manual - Native Image \\ \scriptsize \url{https://www.graalvm.org/22.0/reference-manual/native-image/} \normalsize
+    \end{itemize}
+\end{frame}
 
 \end{document}
 
