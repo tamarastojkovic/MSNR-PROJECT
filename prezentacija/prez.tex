@@ -64,11 +64,17 @@
 \begin{frame}{Uvod}
 \vspace{\baselineskip}
 \begin{itemize}
-	\item Optimizacija - tehnika transformacije dela programa, sa ciljem poboljšanja performansi koda
-    \item Oblast u kojoj se danas vrši većina istraživanja kompajlera
-    \item Kompajleri - različiti nivoi optimizacije
-	\item Na nivoima kompromisi između mera - kvalitet koda, veličina koda, vreme kompilacije
-    \item Izbor kompajlera i nivoa optimizacije zavise od konkretnog programa
+	\item Cilj optimizacije - poboljšanje performansi koda
+    \item Osnovna podela: Optimizacije međukoda i Optimizacije koda
+    \item Optimizacije međukoda: lokalne, globalne i međuproceduralne
+    \item \textcolor{purple}{Lokalne optimizacije} služe za ubrzavanje malih delova neke funkcije
+    \item \textcolor{purple}{Globalne optimizacije} primenjuju se na jednu po jednu funkciju
+    \item \textcolor{purple}{Međuproceduralne optimizacije } :
+    \begin{itemize}
+        \item Vrše se na nivou celog programa tj. više funkcija
+        \item Najpoznatija tehnika - uvlačenje definicija funkcija 
+    \end{itemize}
+    
 \end{itemize}
 \end{frame}
 
@@ -76,12 +82,11 @@
 
 \section{Osnovna podela optimizacija}
 \subsection{Optimizacije međukoda}
-\begin{frame}{Lokalne optimizacije}
-    
+\begin{frame}{Optimizacije međukoda}
+
     \begin{itemize}
-        \item Razlikujemo: lokalne, globalne i međuproceduralne
-        \item  \textcolor{purple}{Lokalne optimizacije} služe za ubrzavanje malih delova neke funkcije, najlakše za izvođenje
-        \item Tehnike lokalne optimizacije koje razlikujemo: 
+        
+        \item Tehnike \textcolor{purple}{lokalne optimizacije} koje razlikujemo: 
                 \begin{itemize}
                     \item Eliminacija čestih podizraza
                     \item Slaganje konstanti
@@ -91,26 +96,13 @@
                     \item Algebarsko pojednostavljenje i reasocijacija
                     \item Kompozicija lokalnih transformacija
                 \end{itemize}
-        \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Globalne i međuproceduralne optimizacije}
-    \begin{itemize}
-        \item \textcolor{purple}{Globalne optimizacije} primenjuju se na jednu po jednu funkciju, slične lokalnim
-        \item Globalne optimizacije koje razlikujemo: 
+        \item \textcolor{purple}{Globalne optimizacije} koje razlikujemo: 
                 \begin{itemize}
-                    \item Globalna eliminacija mrtvog koda
-                    \item Globalno propagiranje konstanti
-                    \item Globalna eliminacija čestih podizraza
-                    \item Optimizacija kretanje koda
-                    \item Pomeranje invarijantog koda
-                    \item Parcijalna eliminacija suvišnosti
+                    \item tehnike lokalne koje se primenjuju globalno (npr. globalna eliminacija mrtvog koda)
+                    \item Optimizacija kretanje koda (pomeranje invarijantog koda, parcijalna eliminacija suvišnosti)
                 \end{itemize}
-        \item \textcolor{purple}{Međuproceduralna optimizacija } - radi na celokupnom grafu kontrole toka
-        \item Vrši se na nivou celog programa tj. više funkcija 
-        \item Najpoznatija tehnika je uvlačenje definicija funkcija 
-        \end{itemize}
+    \end{itemize}
+        
 \end{frame}
 
 
@@ -118,12 +110,12 @@
 \begin{frame}{Optimizacije koda}
     
     \begin{itemize}
-        \item Optimizovani međukod se prevodi u asemblerski tj. mašinski kod - faza generisanja
-        \item  Bitne su specifične karakteristike mašine
+        \item Prerada asemblerskog koda, kako bi se dobio što efikasniji kod
+        \item Zahteva se detaljno poznavanje ciljne arhitekture 
         \item Razlikujemo  sledeće tehnike: 
                 \begin{itemize}
-                    \item Optimizacija redosleda instrukcija - obuhvata fazu odabira instrukcija, alokacije registara i raspoređivanja instrukcija
-                    \item Optimizacija upotrebom keša - zasniva se na prostornoj i vremenskoj lokalnosti, cilj da bude što bolja
+                    \item \textcolor{purple}{Optimizacija redosleda instrukcija }- obuhvata fazu odabira instrukcija, alokacije registara i raspoređivanja instrukcija
+                    \item \textcolor{purple}{Optimizacija upotrebom keša }- zasniva se na prostornoj i vremenskoj lokalnosti, cilj da bude što bolja
                 \end{itemize}
         \end{itemize}
 \end{frame}
@@ -151,7 +143,7 @@ opcijom -On, gde je n nivo zahtevane optimizacije
         \item Optimizacije u vidu prolaza
         \item Svi LLVM prolazi su podklase klase Pass
         \item Funkcionalnosti su implementirane tako što prevazilaze virtuelne metode nasleđene od klase Pass
-        \item Analysis Passes prikuplja informacija koje 
+        \item Analysis Passes prikuplja informacije koje 
 služe za otklanjanje grešaka ili vizuelizaciju programa
         \item Transform Passes se koriste za optimizaciju koda
         \item Utility Passes služe za dobijanje raznih
@@ -213,8 +205,8 @@ informacija, koje su bitne za razvoj drugih prolaza
     \end{figure} 
 \end{frame}
 
-\subsection{Prevodjenje}
-\begin{frame}{Prevodjenje}
+\subsection{Prevođenje}
+\begin{frame}{Prevođenje}
     \begin{itemize}
         \item Statička analiza (Closed World Assumption)
         \vspace{1em}
